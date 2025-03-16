@@ -22,6 +22,9 @@ const nextConfig: NextConfig = {
   compiler: {
     removeConsole: isProduction,
   },
+  images: {
+    domains: ["file.donghyuns.com"],
+  },
 };
 
 export default nextConfig;
