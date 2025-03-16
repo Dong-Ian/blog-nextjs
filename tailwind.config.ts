@@ -15,11 +15,11 @@ export default {
     },
     extend: {
       fontSize: {
-        sm: "var(--font-size)",
-        md: "calc(var(--font-size) + 4px)",
-        lg: "calc(var(--font-size) + 8px)",
-        xs: "calc(var(--font-size) - 4px)",
-        xxs: "calc(var(--font-size) - 8px)",
+        sm: "14px",
+        md: "18px",
+        lg: "24px",
+        xs: "12px",
+        xxs: "10px",
       },
       borderRadius: {
         lg: "var(--radius)",

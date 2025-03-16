@@ -1,5 +1,5 @@
-import React, { ReactNode } from "react";
 import { cn } from "@/lib/utils";
+import { ReactNode } from "react";
 
 type TypoType = "Head1" | "Head2" | "Head3" | "SubTitle1" | "P1" | "P2" | "P3";
 
@@ -9,13 +9,13 @@ interface TypographyProps {
 }
 
 const typoTypeMap: Record<TypoType, string> = {
-  Head1: "text-5xl font-extrabold",
-  Head2: "text-3xl font-bold",
-  Head3: "text-2xl font-semibold",
-  SubTitle1: "text-xl font-medium",
-  P1: "text-base",
-  P2: "text-sm",
-  P3: "text-xs",
+  Head1: "text-6xl font-extrabold",
+  Head2: "text-4xl font-bold",
+  Head3: "text-3xl font-semibold",
+  SubTitle1: "text-2xl font-medium",
+  P1: "text-lg",
+  P2: "text-base",
+  P3: "text-sm",
 };
 
 const BaseTypography = ({
