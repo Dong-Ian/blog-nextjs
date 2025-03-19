@@ -7,7 +7,10 @@ export default async function getAccount() {
     body: JSON.stringify({
       blogId: process.env.NEXT_PUBLIC_BLOG_ID,
     }),
+    next: { revalidate: 60300 },
   });
 
-  return await result.json();
+  const res = await result.json();
+
+  return res.profileResult;
 }

@@ -1,14 +1,13 @@
-"use client";
 import Divider from "@/components/atoms/Divider";
 import Typography from "@/components/atoms/Typography";
 import Image from "next/image";
-import { useFetchUser } from "../hooks/useFetchUser";
+import getAccount from "../services/getAccount.service";
 import PersonalUrl from "./PersonalUrl";
 import ProfileDetail from "./ProfileDetail";
 import SocialInfo from "./SocialInfo";
 
-const AccountComponent = () => {
-  const { userInfo } = useFetchUser();
+const AccountComponent = async () => {
+  const userInfo = await getAccount();
 
   if (!userInfo) return <div>error</div>;
   return (
