@@ -12,7 +12,7 @@ const AccountComponent = () => {
 
   if (!userInfo) return <div>error</div>;
   return (
-    <div className="flex w-[400px] flex-col items-center justify-center p-[30px]">
+    <div className="flex w-[500px] flex-col items-center justify-center p-[30px]">
       <div className="relative mb-[30px] size-[150px] overflow-hidden rounded-full">
         <Image
           alt="profile"
