@@ -4,7 +4,7 @@ import { UserInfoInterface } from "../types/Account.type";
 
 export function useFetchUser() {
   const {
-    data: userInfo,
+    data: userInfo = null,
     error,
     isLoading,
     refetch,
@@ -15,6 +15,7 @@ export function useFetchUser() {
       if (result.result) {
         return result.profileResult as UserInfoInterface;
       }
+      return null;
     },
     staleTime: 10 * 60 * 1000,
     gcTime: 20 * 60 * 1000,
