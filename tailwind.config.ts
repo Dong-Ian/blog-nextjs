@@ -12,6 +12,9 @@ export default {
       tablet: "990px",
       laptop: "1200px",
       desktop: "1600px",
+      sm: "500px",
+      md: "1000px",
+      lg: "1500px",
     },
     extend: {
       fontSize: {

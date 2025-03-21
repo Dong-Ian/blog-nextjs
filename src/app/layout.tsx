@@ -13,7 +13,7 @@ export default function RootLayout({
       <body suppressHydrationWarning>
         <QueryClientProvider>
           <Header />
-          <div className="flex items-center justify-center">
+          <div className="flex w-full items-center justify-center">
             <div className="layout">{children}</div>
           </div>
         </QueryClientProvider>

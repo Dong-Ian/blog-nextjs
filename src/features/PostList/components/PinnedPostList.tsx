@@ -1,0 +1,33 @@
+import Typography from "@/components/atoms/Typography";
+import { getRecentPostList } from "../services/getPostList.service";
+import { PostInterface } from "../types/PostList.type";
+import PostItem from "./PostItem";
+
+interface RecentPostListProps {
+  page: number;
+  size: number;
+}
+
+const PinnedPostList = async ({ page, size }: RecentPostListProps) => {
+  const postList = await getRecentPostList({ page, size });
+
+  return (
+    <div>
+      <div className="mt-[20px] flex items-center justify-between px-[30px]">
+        <Typography.P2 className="text-[20px] font-semibold">
+          고정글
+        </Typography.P2>
+        <Typography.P3 className="cursor-pointer">
+          고정글 전체보기
+        </Typography.P3>
+      </div>
+      <div className="flex flex-col gap-2">
+        {postList.pinnedPostList.map((post: PostInterface) => (
+          <PostItem key={post.postSeq} post={post} />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default PinnedPostList;
