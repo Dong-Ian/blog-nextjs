@@ -16,15 +16,17 @@ export default async function Post({
   const post: PostInterface = await getPost({ postSeq: postSeq });
 
   return (
-    <div>
-      <BackButton />
-      <PostHeader post={post} />
-      <PostAction />
-      <Divider width={100} />
-      <PostContents post={post} />
-      <Divider width={100} />
-      <PostAction />
-      <PostComment post={post} />
+    <div className="">
+      <div className="m-auto w-[90%] max-w-[700px]">
+        <BackButton />
+        <PostHeader post={post} />
+        <PostAction />
+        <Divider width={100} />
+        <PostContents post={post} />
+        <Divider width={100} />
+        <PostAction />
+        <PostComment post={post} />
+      </div>
     </div>
   );
 }

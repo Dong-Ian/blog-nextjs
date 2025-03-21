@@ -8,7 +8,6 @@ const EditorMarkdown = ({ content }: { content: string }) => {
       <MDEditor.Markdown
         source={content}
         style={{
-          width: "700px",
           lineHeight: "30px",
           position: "relative",
           zIndex: 10,
