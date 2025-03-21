@@ -36,7 +36,9 @@ const PostHeader = ({ post }: PostParams) => {
           {post.category}
         </Typography.P1>
       </Link>
-      <Typography.Head2>{post.postTitle}</Typography.Head2>
+      <Typography.Head2 className="text-[30px]">
+        {post.postTitle}
+      </Typography.Head2>
       <div className="flex gap-1">
         {post.tags?.map((tag: string, index: number) => (
           <Link key={index} href={`/postlist/tag/${tag}`}>
