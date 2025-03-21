@@ -20,6 +20,7 @@ export default async function Post({
       <Divider width={100} />
       <PostContents post={post} />
       <Divider width={100} />
+      <PostAction />
     </div>
   );
 }
