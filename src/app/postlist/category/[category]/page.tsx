@@ -8,7 +8,7 @@ export default async function CategoryPostList({
 }: {
   params: { category: string };
 }) {
-  const category = (await params).category;
+  const category = decodeURIComponent((await params).category);
   const postList = await getCategoryPostList({
     page: 1,
     size: 5,
@@ -20,7 +20,7 @@ export default async function CategoryPostList({
       <Typography.SubTitle1 className="ml-[30px] text-gray-500">
         {category}
       </Typography.SubTitle1>
-      {postList.pinnedPostList.map((post: PostInterface) => (
+      {postList.postList.map((post: PostInterface) => (
         <PostItem key={post.postSeq} post={post} />
       ))}
     </div>

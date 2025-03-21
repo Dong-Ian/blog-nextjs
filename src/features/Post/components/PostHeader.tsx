@@ -1,5 +1,6 @@
 import Tag from "@/components/atoms/Tag";
 import Typography from "@/components/atoms/Typography";
+import Link from "next/link";
 import { PostParams } from "../type/Post.type";
 
 interface SubInfoProps {
@@ -30,18 +31,19 @@ const SubInfo = ({ reg, viewed }: SubInfoProps) => {
 const PostHeader = ({ post }: PostParams) => {
   return (
     <div className="flex flex-col gap-4">
-      <Typography.P1 className="mb-[-10px] text-[20px] text-gray-500">
-        {post.category}
-      </Typography.P1>
+      <Link href={`/postlist/category/${post.category}`}>
+        <Typography.P1 className="mb-[-10px] text-[20px] text-gray-500">
+          {post.category}
+        </Typography.P1>
+      </Link>
       <Typography.Head2>{post.postTitle}</Typography.Head2>
       <div className="flex gap-1">
         {post.tags?.map((tag: string, index: number) => (
-          <Tag.Default
-            className="cursor-pointe transition-all hover:cursor-pointer hover:bg-gray-100"
-            key={index}
-          >
-            {tag}
-          </Tag.Default>
+          <Link key={index} href={`/postlist/tag/${tag}`}>
+            <Tag.Default className="cursor-pointe transition-all hover:cursor-pointer hover:bg-gray-100">
+              {tag}
+            </Tag.Default>
+          </Link>
         ))}
       </div>
       <SubInfo reg={post.regDate} viewed={post.viewed} />

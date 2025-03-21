@@ -8,7 +8,7 @@ export default async function TagPostList({
 }: {
   params: { tag: string };
 }) {
-  const tag = (await params).tag;
+  const tag = decodeURIComponent((await params).tag);
   const postList = await getTagPostList({ page: 1, size: 5, tag: tag });
 
   return (
@@ -16,7 +16,7 @@ export default async function TagPostList({
       <Typography.SubTitle1 className="ml-[30px] text-gray-500">
         {tag}
       </Typography.SubTitle1>
-      {postList.pinnedPostList.map((post: PostInterface) => (
+      {postList.postList.map((post: PostInterface) => (
         <PostItem key={post.postSeq} post={post} />
       ))}
     </div>
