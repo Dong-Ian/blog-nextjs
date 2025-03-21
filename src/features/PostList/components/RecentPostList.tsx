@@ -13,9 +13,12 @@ const RecentPostList = async ({ page, size }: RecentPostListProps) => {
 
   return (
     <div>
-      <Typography.P2 className="ml-[30px] mt-[20px] text-[20px] font-semibold">
-        최신글
-      </Typography.P2>
+      <div className="mt-[20px] flex items-center justify-between px-[30px]">
+        <Typography.P2 className="text-[20px] font-semibold">
+          최신글
+        </Typography.P2>
+        <Typography.P3>최신글 전체보기</Typography.P3>
+      </div>
       <div className="flex flex-col gap-2">
         {postList.unpinnedPostList.map((post: PostInterface) => (
           <PostItem key={post.postSeq} post={post} />
