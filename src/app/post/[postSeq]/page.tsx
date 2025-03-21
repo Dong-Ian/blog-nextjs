@@ -1,5 +1,6 @@
 import Divider from "@/components/atoms/Divider";
 import PostAction from "@/features/Post/components/PostAction";
+import PostComment from "@/features/Post/components/PostComment";
 import PostContents from "@/features/Post/components/PostContents";
 import PostHeader from "@/features/Post/components/PostHeader";
 import getPost from "@/features/Post/services/getPost.service";
@@ -21,6 +22,7 @@ export default async function Post({
       <PostContents post={post} />
       <Divider width={100} />
       <PostAction />
+      <PostComment post={post} />
     </div>
   );
 }
