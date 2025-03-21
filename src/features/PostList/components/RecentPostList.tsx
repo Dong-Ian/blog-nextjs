@@ -1,4 +1,5 @@
 import Typography from "@/components/atoms/Typography";
+import Link from "next/link";
 import { getRecentPostList } from "../services/getPostList.service";
 import { PostInterface } from "../types/PostList.type";
 import PostItem from "./PostItem";
@@ -17,7 +18,9 @@ const RecentPostList = async ({ page, size }: RecentPostListProps) => {
         <Typography.P2 className="text-[20px] font-semibold">
           최신글
         </Typography.P2>
-        <Typography.P3>최신글 전체보기</Typography.P3>
+        <Link href={"/postlist"}>
+          <Typography.P3>최신글 전체보기</Typography.P3>
+        </Link>
       </div>
       <div className="flex flex-col gap-2">
         {postList.unpinnedPostList.map((post: PostInterface) => (

@@ -16,7 +16,7 @@ export default async function Post({
   const post: PostInterface = await getPost({ postSeq: postSeq });
 
   return (
-    <div className="mt-[100px]">
+    <div>
       <BackButton />
       <PostHeader post={post} />
       <PostAction />

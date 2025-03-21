@@ -1,4 +1,5 @@
 import Typography from "@/components/atoms/Typography";
+import Link from "next/link";
 import { getRecentPostList } from "../services/getPostList.service";
 import { PostInterface } from "../types/PostList.type";
 import PostItem from "./PostItem";
@@ -17,9 +18,11 @@ const PinnedPostList = async ({ page, size }: RecentPostListProps) => {
         <Typography.P2 className="text-[20px] font-semibold">
           고정글
         </Typography.P2>
-        <Typography.P3 className="cursor-pointer">
-          고정글 전체보기
-        </Typography.P3>
+        <Link href={"/postlist/pinned"}>
+          <Typography.P3 className="cursor-pointer">
+            고정글 전체보기
+          </Typography.P3>
+        </Link>
       </div>
       <div className="flex flex-col gap-2">
         {postList.pinnedPostList.map((post: PostInterface) => (
