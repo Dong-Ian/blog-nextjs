@@ -1,4 +1,5 @@
 import Divider from "@/components/atoms/Divider";
+import BackButton from "@/components/molecules/BackButton";
 import PostAction from "@/features/Post/components/PostAction";
 import PostComment from "@/features/Post/components/PostComment";
 import PostContents from "@/features/Post/components/PostContents";
@@ -16,6 +17,7 @@ export default async function Post({
 
   return (
     <div className="mt-[100px]">
+      <BackButton />
       <PostHeader post={post} />
       <PostAction />
       <Divider width={100} />
