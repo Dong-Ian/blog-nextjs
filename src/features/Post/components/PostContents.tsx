@@ -3,7 +3,7 @@ import { PostParams } from "../type/Post.type";
 
 const PostContents = ({ post }: PostParams) => {
   return (
-    <div>
+    <div className="py-[30px]">
       <EditorMarkdown content={post.postContents} />
     </div>
   );
