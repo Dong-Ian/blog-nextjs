@@ -1,5 +1,10 @@
 const Divider = ({ width }: { width: number }) => {
-  return <div className={`w-[ m-auto my-2${width}%] border-t bg-slate-600`} />;
+  return (
+    <div
+      style={{ width: `${width}%` }}
+      className={"m-auto my-2 border-t border-solid bg-slate-600"}
+    />
+  );
 };
 
 export default Divider;

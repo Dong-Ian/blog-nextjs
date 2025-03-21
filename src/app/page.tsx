@@ -12,7 +12,7 @@ export default function Home() {
 
       <div className="mt-[100px] flex w-full max-w-[760px] flex-col gap-6 px-4">
         <PinnedPostList page={1} size={5} />
-        <Divider width={95} />
+        <Divider width={100} />
         <RecentPostList page={1} size={5} />
       </div>
     </div>
