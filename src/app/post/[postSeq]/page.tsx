@@ -13,8 +13,11 @@ export default async function Post({
 
   return (
     <div className="mt-[100px]">
-      <Typography.P1>{post.category}</Typography.P1>
+      <Typography.P1 className="text-[20px] text-gray-500">
+        {post.category}
+      </Typography.P1>
       <Typography.Head2>{post.postTitle}</Typography.Head2>
+
       <EditorMarkdown content={post.postContents} />
     </div>
   );
