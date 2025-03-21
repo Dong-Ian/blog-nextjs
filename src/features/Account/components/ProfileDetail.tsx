@@ -8,7 +8,7 @@ interface ProfileDetailProps {
 
 const ProfileDetail = ({ title, children }: ProfileDetailProps) => {
   return (
-    <div className="flex w-[340px] items-center py-[10px]">
+    <div className="flex w-[300px] items-center py-[10px]">
       <Typography.P3 className="w-[130px] font-semibold">{title}</Typography.P3>
       <div>{children}</div>
     </div>

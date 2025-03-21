@@ -24,7 +24,11 @@ const PostComment = ({ post }: PostParams) => {
     return () => clearTimeout(timeout);
   }, [post]);
 
-  return <div ref={commentsEl} />;
+  return (
+    <div className="h-[350px]">
+      <div ref={commentsEl} />
+    </div>
+  );
 };
 
 export default PostComment;
