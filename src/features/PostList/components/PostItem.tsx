@@ -1,4 +1,5 @@
 import Typography from "@/components/atoms/Typography";
+import Link from "next/link";
 import { PostInterface } from "../types/PostList.type";
 
 interface PostItemProps {
@@ -69,16 +70,18 @@ const SubInfo = ({ reg, viewed }: SubInfoProps) => {
 
 const PostItem = ({ post }: PostItemProps) => {
   return (
-    <div className="cursor-pointer p-[30px]">
-      <Typography.P2 className="text-gray-500">
-        {post.categoryName}
-      </Typography.P2>
-      <Typography.SubTitle1 className="font-semibold">
-        {post.postTitle}
-      </Typography.SubTitle1>
-      <Contents contents={post.postContents} />
-      <SubInfo reg={post.regDate} viewed={post.viewed} />
-    </div>
+    <Link href={`/post/${post.postSeq}`}>
+      <div className="cursor-pointer p-[30px]">
+        <Typography.P2 className="text-gray-500">
+          {post.categoryName}
+        </Typography.P2>
+        <Typography.SubTitle1 className="font-semibold">
+          {post.postTitle}
+        </Typography.SubTitle1>
+        <Contents contents={post.postContents} />
+        <SubInfo reg={post.regDate} viewed={post.viewed} />
+      </div>
+    </Link>
   );
 };
 
