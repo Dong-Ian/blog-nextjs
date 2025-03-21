@@ -30,11 +30,11 @@ const AccountComponent = async () => {
       <ProfileDetail title="이메일 정보">
         <Typography.P3>{userInfo.userEmail}</Typography.P3>
       </ProfileDetail>
-      <Divider />
+      <Divider width={95} />
       <ProfileDetail title="소셜 정보">
         <SocialInfo userInfo={userInfo} />
       </ProfileDetail>
-      <Divider />
+      <Divider width={95} />
       <ProfileDetail title="링크">
         <PersonalUrl url={userInfo.personalUrl} />
       </ProfileDetail>

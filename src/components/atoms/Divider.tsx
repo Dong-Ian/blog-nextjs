@@ -1,5 +1,5 @@
-const Divider = () => {
-  return <div className="m-auto my-2 w-[95%] border-t bg-slate-600" />;
+const Divider = ({ width }: { width: number }) => {
+  return <div className={`w-[ m-auto my-2${width}%] border-t bg-slate-600`} />;
 };
 
 export default Divider;
