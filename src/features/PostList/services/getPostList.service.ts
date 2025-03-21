@@ -22,7 +22,7 @@ async function getRecentPostList({ page, size }: GetPostListFunctionProps) {
     throw new Error("Failed to fetch recent posts");
   }
 
-  return response.json();
+  return await response.json();
 }
 
 // 고정된 게시물 목록을 가져오는 함수
@@ -44,7 +44,7 @@ async function getPinnedPostList({ page, size }: GetPostListFunctionProps) {
     throw new Error("Failed to fetch pinned posts");
   }
 
-  return response.json();
+  return await response.json();
 }
 
 // 카테고리별 게시물 목록을 가져오는 함수
@@ -71,7 +71,7 @@ async function getCategoryPostList({
     throw new Error(`Failed to fetch posts in category: ${category}`);
   }
 
-  return response.json();
+  return await response.json();
 }
 
 // 태그별 게시물 목록을 가져오는 함수
@@ -98,7 +98,7 @@ async function getTagPostList({
     throw new Error(`Failed to fetch posts with tag: ${tag}`);
   }
 
-  return response.json();
+  return await response.json();
 }
 
 export {
