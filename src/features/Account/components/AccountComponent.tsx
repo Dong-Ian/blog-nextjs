@@ -11,7 +11,7 @@ const AccountComponent = async () => {
 
   if (!userInfo) return <div>error</div>;
   return (
-    <div className="flex w-[450px] flex-col items-center justify-center p-[30px]">
+    <div className="flex w-[400px] flex-col items-center justify-center p-[30px]">
       <div className="relative mb-[30px] size-[150px] overflow-hidden rounded-full">
         <Image
           alt="profile"
@@ -30,11 +30,11 @@ const AccountComponent = async () => {
       <ProfileDetail title="이메일 정보">
         <Typography.P3>{userInfo.userEmail}</Typography.P3>
       </ProfileDetail>
-      <Divider />
+      <Divider width={95} />
       <ProfileDetail title="소셜 정보">
         <SocialInfo userInfo={userInfo} />
       </ProfileDetail>
-      <Divider />
+      <Divider width={95} />
       <ProfileDetail title="링크">
         <PersonalUrl url={userInfo.personalUrl} />
       </ProfileDetail>

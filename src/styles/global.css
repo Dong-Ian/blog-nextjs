@@ -27,3 +27,7 @@ select {
   background: url(/icon/chevron-down.png) no-repeat 92% 50%;
   background-size: 21px 18px; /* 원하는 크기로 조절 */
 }
+
+.w-md-editor * {
+  font-family: inherit !important;
+}

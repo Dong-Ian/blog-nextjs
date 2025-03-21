@@ -1,5 +1,6 @@
 export interface PostInterface {
-  categoryName: string;
+  category?: string;
+  categoryName?: string;
   isPinned: "0" | "1";
   modDate: string;
   postContents: string;
