@@ -1,5 +1,6 @@
-import EditorMarkdown from "@/components/atoms/EditorMarkdown";
-import Typography from "@/components/atoms/Typography";
+import PostAction from "@/features/Post/components/PostAction";
+import PostContents from "@/features/Post/components/PostContents";
+import PostHeader from "@/features/Post/components/PostHeader";
 import getPost from "@/features/Post/services/getPost.service";
 import { PostInterface } from "@/features/Post/type/Post.type";
 
@@ -13,12 +14,9 @@ export default async function Post({
 
   return (
     <div className="mt-[100px]">
-      <Typography.P1 className="text-[20px] text-gray-500">
-        {post.category}
-      </Typography.P1>
-      <Typography.Head2>{post.postTitle}</Typography.Head2>
-
-      <EditorMarkdown content={post.postContents} />
+      <PostHeader post={post} />
+      <PostAction />
+      <PostContents post={post} />
     </div>
   );
 }
