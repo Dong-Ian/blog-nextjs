@@ -1,7 +1,7 @@
 import EditorMarkdown from "@/components/atoms/EditorMarkdown";
 import Typography from "@/components/atoms/Typography";
 import getPost from "@/features/Post/services/getPost.service";
-import { PostInterface } from "@/features/PostList/types/PostList.type";
+import { PostInterface } from "@/features/Post/type/Post.type";
 
 export default async function Post({
   params,
