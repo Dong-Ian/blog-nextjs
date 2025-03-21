@@ -9,6 +9,11 @@ interface ContentsProps {
   contents: string;
 }
 
+interface SubInfoProps {
+  reg: string;
+  viewed: string;
+}
+
 const Contents = ({ contents }: ContentsProps) => {
   const stripMarkdown = (markdown: string) => {
     return markdown
@@ -42,6 +47,26 @@ const Contents = ({ contents }: ContentsProps) => {
   );
 };
 
+const SubInfo = ({ reg, viewed }: SubInfoProps) => {
+  const date = new Date(reg);
+  date.setHours(date.getHours() + 9);
+
+  const formattedDate = `${date.getFullYear()}년 ${
+    date.getMonth() + 1
+  }월 ${date.getDate()}일 ${String(date.getHours()).padStart(2, "0")}:${String(
+    date.getMinutes()
+  ).padStart(2, "0")}`;
+
+  return (
+    <div className="mt-[10px]">
+      <Typography.P3 className="text-gray-400">
+        {formattedDate}
+        <span> | 조회수 {viewed}</span>
+      </Typography.P3>
+    </div>
+  );
+};
+
 const PostItem = ({ post }: PostItemProps) => {
   return (
     <div className="cursor-pointer p-[30px]">
@@ -52,6 +77,7 @@ const PostItem = ({ post }: PostItemProps) => {
         {post.postTitle}
       </Typography.SubTitle1>
       <Contents contents={post.postContents} />
+      <SubInfo reg={post.regDate} viewed={post.viewed} />
     </div>
   );
 };

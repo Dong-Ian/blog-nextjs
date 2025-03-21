@@ -1,3 +1,4 @@
+import Divider from "@/components/atoms/Divider";
 import AccountComponent from "@/features/Account/components/AccountComponent";
 import PinnedPostList from "@/features/PostList/components/PinnedPostList";
 import RecentPostList from "@/features/PostList/components/RecentPostList";
@@ -11,6 +12,7 @@ export default function Home() {
 
       <div className="mt-[100px] flex w-full max-w-[760px] flex-col gap-6 px-4">
         <PinnedPostList page={1} size={5} />
+        <Divider />
         <RecentPostList page={1} size={5} />
       </div>
     </div>
