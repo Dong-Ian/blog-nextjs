@@ -3,7 +3,7 @@ import React, { HTMLAttributes } from "react";
 
 const TagClass = {
   Default:
-    "box-border flex items-center bg-white text-black border-[1px] rounded-md px-3 pt-0.5 text-[0.75rem] h-[25px] w-fit min-w-fit",
+    "box-border flex items-center bg-white text-black border-[1px] rounded-md px-3 text-[0.75rem] h-[25px] w-fit min-w-fit",
   Main: "bg-mos-main-500 text-white border-mos-main-500",
 };
 
