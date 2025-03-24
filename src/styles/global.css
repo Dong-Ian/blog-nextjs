@@ -17,6 +17,8 @@ body {
 
 .layout {
   /* @apply max-w-[500px]; */
+  max-width: 800px;
+  width: 90%;
 }
 select {
   -webkit-appearance: none; /* 크롬 화살표 없애기 */
