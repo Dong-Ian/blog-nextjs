@@ -30,6 +30,7 @@ const Contents = ({ contents }: ContentsProps) => {
       .replace(/---/g, "") // horizontal rule
       .replace(/\r?\n|\r/g, " ") // 줄바꿈 제거
       .replace(/\s+/g, " ") // 연속 공백 제거
+      .replace(/<[^>]*>/g, "")
       .trim();
   };
 
