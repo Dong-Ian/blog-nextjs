@@ -17,7 +17,7 @@ export default async function Post({
   const post: PostInterface = await getPost({ postSeq: postSeq });
 
   return (
-    <div className="flex justify-center">
+    <div className="flex w-full justify-center">
       <div className="hidden lg:fixed lg:left-0 lg:top-40 lg:block">
         <AccountComponent />
       </div>
