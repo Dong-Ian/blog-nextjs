@@ -15,3 +15,7 @@ export interface PostInterface {
 export interface PostParams {
   post: PostInterface;
 }
+
+export interface AuthPostProps {
+  postSeq: string;
+}
