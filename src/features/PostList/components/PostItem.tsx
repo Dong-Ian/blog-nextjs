@@ -72,11 +72,11 @@ const SubInfo = ({ reg, viewed }: SubInfoProps) => {
 const PostItem = ({ post }: PostItemProps) => {
   return (
     <Link href={`/post/${post.postSeq}`}>
-      <div className="cursor-pointer p-[30px]">
+      <div className="group cursor-pointer p-[30px]">
         <Typography.P2 className="text-gray-500">
           {post.categoryName}
         </Typography.P2>
-        <Typography.SubTitle1 className="font-semibold">
+        <Typography.SubTitle1 className="font-semibold transition-colors duration-200 group-hover:text-sky-400">
           {post.postTitle}
         </Typography.SubTitle1>
         <Contents contents={post.postContents} />
