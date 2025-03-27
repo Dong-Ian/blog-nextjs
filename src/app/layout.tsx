@@ -1,6 +1,9 @@
+"use client";
 import QueryClientProvider from "@/app/queryClientProvider";
 import Header from "@/components/molecules/Header";
+import { cn } from "@/lib/utils";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import { usePathname } from "next/navigation";
 import "../styles/global.css";
 
 export default function RootLayout({
@@ -8,13 +11,25 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const pathname = usePathname();
+  const showHeader =
+    pathname === "/" ||
+    pathname === "/post" ||
+    pathname.startsWith("/post/") ||
+    pathname === "/postlist" ||
+    pathname.startsWith("/postlist/");
   return (
     <html lang="en">
       <body suppressHydrationWarning>
         <QueryClientProvider>
-          <Header />
-          <div className="mt-[100px] flex w-full items-center justify-center">
-            <div className="layout">{children}</div>
+          {showHeader && <Header />}
+          <div
+            className={cn(
+              "flex w-full items-center justify-center",
+              showHeader && "mt-[100px]"
+            )}
+          >
+            {children}
           </div>
         </QueryClientProvider>
       </body>

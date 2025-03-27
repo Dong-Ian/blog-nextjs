@@ -25,7 +25,7 @@ export default function Login() {
   };
 
   return (
-    <div className="flex h-screen flex-col items-center bg-zinc-300">
+    <div className="flex h-screen w-full flex-col items-center bg-zinc-300">
       <FormProvider {...methods}>
         <form
           onSubmit={methods.handleSubmit(handleLogin)}

@@ -5,15 +5,17 @@ import RecentPostList from "@/features/PostList/components/RecentPostList";
 
 export default function Home() {
   return (
-    <div className="flex justify-center">
-      <div className="hidden lg:fixed lg:left-0 lg:top-40 lg:block">
-        <AccountComponent />
-      </div>
+    <div>
+      <div className="flex justify-center">
+        <div className="hidden lg:fixed lg:left-0 lg:top-40 lg:block">
+          <AccountComponent />
+        </div>
 
-      <div className="flex w-full max-w-[760px] flex-col gap-6 px-4">
-        <PinnedPostList page={1} size={5} />
-        <Divider width={100} />
-        <RecentPostList page={1} size={5} />
+        <div className="flex w-full max-w-[760px] flex-col gap-6 px-4">
+          <PinnedPostList page={1} size={5} />
+          <Divider width={100} />
+          <RecentPostList page={1} size={5} />
+        </div>
       </div>
     </div>
   );
