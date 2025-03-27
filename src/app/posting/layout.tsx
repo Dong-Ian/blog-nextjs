@@ -1,5 +1,4 @@
 import QueryClientProvider from "@/app/queryClientProvider";
-
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "../../styles/global.css";
 
@@ -10,8 +9,8 @@ export default function RootLayout({
 }) {
   return (
     <QueryClientProvider>
-      <div className="flex w-full items-center justify-center">
-        <div className="w-full">{children}</div>
+      <div className="mt-[100px] flex w-full items-center justify-center">
+        <div className="w-[90%] max-w-screen-desktop">{children}</div>
       </div>
     </QueryClientProvider>
   );
