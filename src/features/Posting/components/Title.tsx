@@ -7,7 +7,7 @@ const Title = () => {
         <Input
           name="title"
           placeholder="제목을 입력하세요"
-          className="ml-[-15px] w-4/5 border-none text-[30px] font-bold outline-none placeholder:text-gray-500"
+          className="ml-[-15px] w-4/5 border-none text-[30px] font-semibold outline-none placeholder:text-gray-500"
         />
         <div className="border-b" />
       </div>

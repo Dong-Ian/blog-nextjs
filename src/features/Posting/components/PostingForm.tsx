@@ -20,10 +20,23 @@ interface PostingFromInterface {
   categoryList: string[];
 }
 const PostingForm: React.FC<PostingFromInterface> = ({ categoryList }) => {
-  const methods = useForm<PostingInterface>();
+  const methods = useForm<PostingInterface>({ mode: "onSubmit" });
   const router = useRouter();
 
   const handleFormSubmit = async (data: PostingInterface) => {
+    if (data.title === "") {
+      alert("제목을 입력해주세요");
+      return;
+    }
+    if (data.category === "") {
+      alert("카테고리를 선택해주세요");
+      return;
+    }
+    if (!data.contents || data.contents === "") {
+      alert("내용을 입력해주세요");
+      return;
+    }
+
     if (window.confirm("포스팅 하시겠습니까?")) {
       const result = await posting({ form: data });
 
