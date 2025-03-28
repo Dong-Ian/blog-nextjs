@@ -1,16 +1,10 @@
+import { PostingInterface } from "../components/PostingForm";
+
 export interface PostingFunctionProps {
-  postTitle: string;
-  postContents: string;
-  tags: string[];
-  category: string;
+  form: PostingInterface;
 }
 
-export default async function posting({
-  postTitle,
-  postContents,
-  tags,
-  category,
-}: PostingFunctionProps) {
+export default async function posting({ form }: PostingFunctionProps) {
   const result = await fetch(
     `${process.env.NEXT_PUBLIC_API}/admin/post/register`,
     {
@@ -20,11 +14,11 @@ export default async function posting({
       },
       credentials: "include",
       body: JSON.stringify({
-        postTitle: postTitle,
-        postContents: postContents,
+        postTitle: form.title,
+        postContents: form.contents,
         imageSeqs: [],
-        tags: tags,
-        category: category,
+        tags: form.tags,
+        category: form.category,
         isPinned: "0",
       }),
     }

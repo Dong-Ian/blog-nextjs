@@ -2,12 +2,14 @@
 import Button from "@/components/atoms/Button";
 import Editor from "@/components/atoms/Editor";
 import BackButton from "@/components/molecules/BackButton";
+import { useRouter } from "next/navigation";
 import { FormProvider, useForm } from "react-hook-form";
+import posting from "../services/posting.service";
 import Category from "./Category";
 import TagList from "./TagList";
 import Title from "./Title";
 
-interface PostingInterface {
+export interface PostingInterface {
   title: string;
   category: string;
   tags: string[];
@@ -19,9 +21,16 @@ interface PostingFromInterface {
 }
 const PostingForm: React.FC<PostingFromInterface> = ({ categoryList }) => {
   const methods = useForm<PostingInterface>();
+  const router = useRouter();
 
   const handleFormSubmit = async (data: PostingInterface) => {
-    console.table(data);
+    if (window.confirm("포스팅 하시겠습니까?")) {
+      const result = await posting({ form: data });
+
+      if (result.code === "01") {
+        router.push(`/post/${result.postSeq}`);
+      }
+    }
   };
 
   return (
