@@ -42,7 +42,9 @@ const PostingForm: React.FC<PostingFromInterface> = ({ categoryList }) => {
 
       if (result.code === "01") {
         router.push(`/post/${result.postSeq}`);
+        return;
       }
+      alert("포스팅이 완료되지 않았습니다.\n 잠시 후에 다시 시도해주세요");
     }
   };
 
