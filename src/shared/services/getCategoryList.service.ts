@@ -14,5 +14,5 @@ export default async function getCategoryList() {
 
   const res = await result.json();
 
-  return res;
+  return res.categoryList;
 }

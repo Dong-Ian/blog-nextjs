@@ -1,7 +1,8 @@
-"use client";
-
 import PostingForm from "@/features/Posting/components/PostingForm";
+import getCategoryList from "@/shared/services/getCategoryList.service";
 
-export default function Posting() {
-  return <PostingForm />;
+export default async function Posting() {
+  const categoryList = await getCategoryList();
+
+  return <PostingForm categoryList={categoryList} />;
 }
