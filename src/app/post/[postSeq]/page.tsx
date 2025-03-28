@@ -24,7 +24,7 @@ export default async function Post({
         <AccountComponent />
       </div>
       <div className="m-auto w-[90%] max-w-[700px]">
-        <BackButton />
+        <BackButton.Back />
         <PostHeader post={post} />
         <PostAction />
         <Divider width={100} />

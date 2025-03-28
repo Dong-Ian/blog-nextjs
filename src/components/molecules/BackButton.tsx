@@ -3,11 +3,19 @@
 import { useRouter } from "next/navigation";
 import Typography from "../atoms/Typography";
 
-const BackButton = () => {
+interface BackButtonProps {
+  onBack?: () => void;
+}
+
+const Base = ({ onBack }: BackButtonProps) => {
   const router = useRouter();
 
   const handleBack = () => {
-    router.back();
+    if (onBack) {
+      onBack();
+    } else {
+      router.back();
+    }
   };
 
   return (
@@ -19,6 +27,11 @@ const BackButton = () => {
       <Typography.P3 className="text-[16px]">뒤로가기</Typography.P3>
     </div>
   );
+};
+
+const BackButton = {
+  Back: () => <Base />,
+  Custom: ({ onBack }: { onBack: () => void }) => <Base onBack={onBack} />,
 };
 
 export default BackButton;

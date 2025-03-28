@@ -48,12 +48,22 @@ const PostingForm: React.FC<PostingFromInterface> = ({ categoryList }) => {
     }
   };
 
+  const onBack = () => {
+    if (
+      window.confirm(
+        "내용이 저장되지 않습니다.\n정말로 글 작성을 취소하시겠습니까?"
+      )
+    ) {
+      router.back();
+    }
+  };
+
   return (
     <div className="mb-[80px] mt-[30px] w-[90%] max-w-[1400px]">
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(handleFormSubmit)}>
           <div className="flex w-full justify-between">
-            <BackButton />
+            <BackButton.Custom onBack={onBack} />
             <Button.Default
               type="submit"
               className="rounded-full border-black font-bold hover:bg-black hover:text-white"
