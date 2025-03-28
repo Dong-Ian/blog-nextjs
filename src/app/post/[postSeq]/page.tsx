@@ -23,7 +23,7 @@ export default async function Post({
       <div className="hidden lg:fixed lg:left-0 lg:top-40 lg:block">
         <AccountComponent />
       </div>
-      <div className="m-auto w-[90%] max-w-[800px]">
+      <div className="m-auto w-[90%] max-w-[700px]">
         <BackButton />
         <PostHeader post={post} />
         <PostAction />

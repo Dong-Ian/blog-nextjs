@@ -1,9 +1,7 @@
-import Editor from "@/components/atoms/Editor";
+"use client";
 
-export default async function Posting() {
-  return (
-    <div>
-      <Editor />
-    </div>
-  );
+import PostingForm from "@/features/Posting/components/PostingForm";
+
+export default function Posting() {
+  return <PostingForm />;
 }
