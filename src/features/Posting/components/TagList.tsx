@@ -1,5 +1,6 @@
 import Input from "@/components/atoms/Input";
 import Tag from "@/components/atoms/Tag";
+import Typography from "@/components/atoms/Typography";
 import React, { useState } from "react";
 
 interface TagListFieldProps {
@@ -33,7 +34,7 @@ const TagList: React.FC<TagListFieldProps> = ({ tagList, setTagList }) => {
 
   const TagRender: React.FC = () => {
     if (tagList.length === 0) {
-      return <div className="h-[33px] w-full border-b border-gray-300" />;
+      return <div className="h-[33px] w-full" />;
     }
 
     return (
@@ -41,12 +42,12 @@ const TagList: React.FC<TagListFieldProps> = ({ tagList, setTagList }) => {
         {tagList.map((tag, index) => {
           return (
             <Tag.Default key={index}>
-              <p>{tag}</p>
+              <Typography.P3>{tag}</Typography.P3>
               <button
-                className="ml-3 border-none outline-none"
+                className="ml-3 border-none outline-none "
                 onClick={() => handleClearClick(index)}
               >
-                x
+                <i className="bi bi-x mr-[-8px] text-md" />
               </button>
             </Tag.Default>
           );
