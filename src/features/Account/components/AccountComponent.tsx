@@ -1,14 +1,16 @@
 import Divider from "@/components/atoms/Divider";
 import Typography from "@/components/atoms/Typography";
 import Image from "next/image";
-import getAccount from "../services/getAccount.service";
+import { UserInfoInterface } from "../types/Account.type";
 import PersonalUrl from "./PersonalUrl";
 import ProfileDetail from "./ProfileDetail";
 import SocialInfo from "./SocialInfo";
 
-const AccountComponent = async () => {
-  const userInfo = await getAccount();
+interface AccountComponentProps {
+  userInfo: UserInfoInterface;
+}
 
+const AccountComponent = ({ userInfo }: AccountComponentProps) => {
   return (
     <div className="flex w-[400px] flex-col items-center justify-center p-[30px]">
       <div className="relative mb-[30px] size-[150px] overflow-hidden rounded-full">

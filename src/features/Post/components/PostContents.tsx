@@ -1,4 +1,3 @@
-"use client";
 import { PostParams } from "../type/Post.type";
 
 import MDEditor from "@uiw/react-md-editor";
