@@ -7,12 +7,11 @@ import { useFormContext } from "react-hook-form";
 const TagList = () => {
   const [tagElement, setTagElement] = useState("");
   const [tagList, setTagList] = useState<string[]>([]);
+  const [isComposing, setIsComposing] = useState(false);
 
+  const handleCompositionStart = () => setIsComposing(true);
+  const handleCompositionEnd = () => setIsComposing(false);
   const { setValue } = useFormContext();
-
-  useEffect(() => {
-    setValue("tags", tagList);
-  }, [tagList, setValue]);
 
   const handleTag = (event: React.ChangeEvent<HTMLInputElement>) => {
     const {
@@ -22,20 +21,25 @@ const TagList = () => {
   };
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (isComposing) return;
+
     if (
       (event.key === "Enter" || event.key === " ") &&
       tagElement.trim() !== ""
     ) {
       event.preventDefault();
-
       setTagList((prevTags) => [...prevTags, tagElement]);
-      setTagElement(""); // 입력 필드 비우기
+      setTagElement("");
     }
   };
 
   const handleClearClick = (index: number) => {
     setTagList((prevTags) => prevTags.filter((_, i) => i !== index));
   };
+
+  useEffect(() => {
+    setValue("tags", tagList);
+  }, [tagList, setValue]);
 
   const TagRender: React.FC = () => {
     if (tagList.length === 0) {
@@ -69,6 +73,8 @@ const TagList = () => {
           value={tagElement}
           onChange={handleTag}
           onKeyDown={handleKeyPress}
+          onCompositionStart={handleCompositionStart}
+          onCompositionEnd={handleCompositionEnd}
           className="ml-[-15px] border-none outline-none placeholder:text-gray-400"
         />
         <div className="border-b" />
