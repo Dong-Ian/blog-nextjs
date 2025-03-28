@@ -1,15 +1,18 @@
 import Input from "@/components/atoms/Input";
 import Tag from "@/components/atoms/Tag";
 import Typography from "@/components/atoms/Typography";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useFormContext } from "react-hook-form";
 
-interface TagListFieldProps {
-  tagList: string[];
-  setTagList: React.Dispatch<React.SetStateAction<string[]>>;
-}
-
-const TagList: React.FC<TagListFieldProps> = ({ tagList, setTagList }) => {
+const TagList = () => {
   const [tagElement, setTagElement] = useState("");
+  const [tagList, setTagList] = useState<string[]>([]);
+
+  const { setValue } = useFormContext();
+
+  useEffect(() => {
+    setValue("tags", tagList);
+  }, [tagList, setValue]);
 
   const handleTag = (event: React.ChangeEvent<HTMLInputElement>) => {
     const {
@@ -23,6 +26,8 @@ const TagList: React.FC<TagListFieldProps> = ({ tagList, setTagList }) => {
       (event.key === "Enter" || event.key === " ") &&
       tagElement.trim() !== ""
     ) {
+      event.preventDefault();
+
       setTagList((prevTags) => [...prevTags, tagElement]);
       setTagElement(""); // 입력 필드 비우기
     }
@@ -60,11 +65,10 @@ const TagList: React.FC<TagListFieldProps> = ({ tagList, setTagList }) => {
     <div className="flex w-full flex-wrap items-center">
       <div className="w-[200px]">
         <Input
-          name="tag"
           placeholder="태그를 입력해주세요"
           value={tagElement}
           onChange={handleTag}
-          onKeyPress={handleKeyPress}
+          onKeyDown={handleKeyPress}
           className="ml-[-15px] border-none outline-none placeholder:text-gray-400"
         />
         <div className="border-b" />

@@ -7,14 +7,15 @@ import MDEditor, {
   TextState,
 } from "@uiw/react-md-editor";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { useState } from "react";
+import { useFormContext } from "react-hook-form";
 
 const Editor = () => {
-  const [contents, setContents] = useState<string>("");
+  const { setValue, watch } = useFormContext();
+  const contents = watch("contents");
 
   const handleChange = (value?: string) => {
     if (value !== undefined) {
-      setContents(value);
+      setValue("contents", value);
     }
   };
 
@@ -56,16 +57,16 @@ const Editor = () => {
     buttonProps: { "aria-label": "Insert image" },
     icon: <i className="bi bi-image" />,
     execute: (state: TextState, api: TextAreaTextApi) => {
-      imageHandler(api, contents, setContents);
+      imageHandler(api);
     },
   };
 
   return (
     <MDEditor
-      className="mt-[30px]"
+      className="mt-[20px]"
       value={contents}
       onChange={handleChange}
-      height={550}
+      height={800}
       commands={[...commands.getCommands(), customImageCommand]}
     />
   );
