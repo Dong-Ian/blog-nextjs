@@ -1,6 +1,6 @@
 import Skeleton from "../atoms/Skeleton";
 
-const SkeketonPostList = () => {
+const SkeletonPostList = () => {
   return (
     <div className="ml-6 mt-10 flex w-full max-w-[800px] flex-col gap-2">
       <Skeleton width="100px" height="16px" rounded="rounded-lg" />
@@ -25,4 +25,4 @@ const SkeketonPostList = () => {
   );
 };
 
-export default SkeketonPostList;
+export default SkeletonPostList;
