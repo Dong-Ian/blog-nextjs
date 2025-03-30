@@ -1,31 +1,18 @@
 "use client";
-import { cn } from "@/lib/utils";
-import { usePathname } from "next/navigation";
+import SkeketonPostList from "@/components/molecules/SkeletonPostList";
 
 const Loading = () => {
-  const pathname = usePathname();
-  const hasHeader =
-    pathname === "/" ||
-    pathname === "/post" ||
-    pathname.startsWith("/post/") ||
-    pathname === "/postlist" ||
-    pathname.startsWith("/postlist/");
-
   return (
-    <div
-      className={cn(
-        "flex h-screen items-center justify-center",
-        hasHeader && "mt-[-100px]"
-      )}
-    >
-      <div
-        className="size-[70px] animate-spin rounded-full 
-                   border-8 border-gray-200 border-t-black"
-        style={{
-          animationDuration: "1s",
-          animationTimingFunction: "ease-in-out",
-        }}
-      />
+    <div className="flex w-full justify-center">
+      {/* <div className="hidden lg:fixed lg:left-0 lg:top-40 lg:block">
+        <SkeketonAccount />
+      </div> */}
+      <div className="flex w-full max-w-[760px] flex-col gap-6 px-4">
+        <SkeketonPostList />
+        <SkeketonPostList />
+        <SkeketonPostList />
+        <SkeketonPostList />
+      </div>
     </div>
   );
 };
