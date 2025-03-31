@@ -7,17 +7,58 @@ import MDEditor, {
   TextState,
 } from "@uiw/react-md-editor";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { useEffect, useRef } from "react";
 import { useFormContext } from "react-hook-form";
 
 const Editor = () => {
   const { setValue, watch } = useFormContext();
   const contents = watch("contents");
+  const editorRef = useRef<HTMLDivElement>(null);
 
   const handleChange = (value?: string) => {
     if (value !== undefined) {
       setValue("contents", value);
     }
   };
+
+  const uploadImageAndInsert = async (file: File) => {
+    const storageRef = ref(storage, `image/${Date.now()}`);
+    const snapshot = await uploadBytes(storageRef, file);
+    const url = await getDownloadURL(snapshot.ref);
+    const insert = `![image](${url})`;
+
+    const newValue = (contents ?? "") + "\n" + insert;
+    setValue("contents", newValue);
+  };
+
+  useEffect(() => {
+    const handleDrop = async (e: DragEvent) => {
+      e.preventDefault();
+      if (!e.dataTransfer?.files?.length) return;
+
+      const file = e.dataTransfer.files[0];
+      if (!file.type.startsWith("image/")) return;
+
+      await uploadImageAndInsert(file);
+    };
+
+    const handleDragOver = (e: DragEvent) => {
+      e.preventDefault();
+    };
+
+    const wrapper = editorRef.current;
+    if (wrapper) {
+      wrapper.addEventListener("drop", handleDrop);
+      wrapper.addEventListener("dragover", handleDragOver);
+    }
+
+    return () => {
+      if (wrapper) {
+        wrapper.removeEventListener("drop", handleDrop);
+        wrapper.removeEventListener("dragover", handleDragOver);
+      }
+    };
+  }, [contents, setValue]);
 
   const imageHandler = (
     api: TextAreaTextApi,
@@ -34,19 +75,15 @@ const Editor = () => {
       if (!file) return;
 
       const storageRef = ref(storage, `image/${Date.now()}`);
-      try {
-        const snapshot = await uploadBytes(storageRef, file);
-        const url = await getDownloadURL(snapshot.ref);
-        const insert = `![image](${url})`;
+      const snapshot = await uploadBytes(storageRef, file);
+      const url = await getDownloadURL(snapshot.ref);
+      const insert = `![image](${url})`;
 
-        api.replaceSelection(insert);
+      api.replaceSelection(insert);
 
-        if (onChange) {
-          const updated = `${value || ""}\n${insert}`;
-          onChange(updated);
-        }
-      } catch (error) {
-        alert(`${error} 이미지 업로드 실패`);
+      if (onChange) {
+        const newValue = (value ?? "") + "\n" + insert;
+        onChange(newValue);
       }
     });
   };
@@ -57,18 +94,20 @@ const Editor = () => {
     buttonProps: { "aria-label": "Insert image" },
     icon: <i className="bi bi-image" />,
     execute: (state: TextState, api: TextAreaTextApi) => {
-      imageHandler(api);
+      imageHandler(api, contents, handleChange);
     },
   };
 
   return (
-    <MDEditor
-      className="mt-[20px]"
-      value={contents}
-      onChange={handleChange}
-      height={800}
-      commands={[...commands.getCommands(), customImageCommand]}
-    />
+    <div ref={editorRef}>
+      <MDEditor
+        className="mt-[20px]"
+        value={contents}
+        onChange={handleChange}
+        height={800}
+        commands={[...commands.getCommands(), customImageCommand]}
+      />
+    </div>
   );
 };
 

@@ -61,8 +61,8 @@ async function getCategoryPostList({
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        blogId: process.env.NEXT_PUBLIC_BLOG_ID,
         category,
+        blogId: process.env.NEXT_PUBLIC_BLOG_ID,
       }),
     }
   );
@@ -88,8 +88,8 @@ async function getTagPostList({
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        blogId: process.env.NEXT_PUBLIC_BLOG_ID,
         tag,
+        blogId: process.env.NEXT_PUBLIC_BLOG_ID,
       }),
     }
   );
