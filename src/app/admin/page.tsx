@@ -1,7 +1,8 @@
+import getAccount from "@/features/Account/services/getAccount.service";
+import AdminForm from "./AdminForm";
+
 export default async function Admin() {
-  return (
-    <div>
-      <p>admin</p>
-    </div>
-  );
+  const userInfo = await getAccount();
+
+  return <AdminForm userInfo={userInfo} />;
 }

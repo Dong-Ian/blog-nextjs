@@ -18,7 +18,8 @@ export default function RootLayout({
     pathname === "/post" ||
     pathname.startsWith("/post/") ||
     pathname === "/postlist" ||
-    pathname.startsWith("/postlist/");
+    pathname.startsWith("/postlist/") ||
+    pathname === "/admin";
 
   return (
     <html lang="en">
