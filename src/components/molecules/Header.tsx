@@ -39,7 +39,7 @@ const Header = () => {
         <Typography.Head1 className="text-[34px]">Archive</Typography.Head1>
       </Link>
       <div className="flex items-center justify-center gap-5">
-        <Link href={"/posting"}>
+        <Link href={"/admin"}>
           <i className="bi bi-person-circle align-middle text-[30px]"></i>
         </Link>
         <Link href={"/posting"}>
