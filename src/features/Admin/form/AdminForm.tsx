@@ -6,6 +6,7 @@ import { UserInfoInterface } from "@/features/Account/types/Account.type";
 import InputRow from "@/features/Admin/components/InputRow";
 import editUserInfo from "@/features/Admin/services/editUserInfo.service";
 import { FormProvider, useForm } from "react-hook-form";
+import ImageForm from "./ImageForm";
 
 interface AdminFormProps {
   userInfo: UserInfoInterface;
@@ -57,6 +58,8 @@ export default function AdminForm({ userInfo }: AdminFormProps) {
           <Typography.SubTitle1 className="mb-6 text-md font-semibold">
             회원 정보 변경
           </Typography.SubTitle1>
+
+          <ImageForm userInfo={userInfo} />
           <div className="mb-[30px] flex flex-col gap-2">
             <InputRow
               name="name"
