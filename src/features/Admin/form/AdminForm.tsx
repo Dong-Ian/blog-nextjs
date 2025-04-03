@@ -20,6 +20,7 @@ interface AdminFormInput {
   github: string;
   personalUrl: string;
   color: string;
+  image: FileList | null;
 }
 
 export default function AdminForm({ userInfo }: AdminFormProps) {
@@ -32,6 +33,7 @@ export default function AdminForm({ userInfo }: AdminFormProps) {
       github: userInfo.githubUrl,
       personalUrl: userInfo.personalUrl,
       color: userInfo.color,
+      image: null,
     },
   });
 
