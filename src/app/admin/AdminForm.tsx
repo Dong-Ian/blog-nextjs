@@ -4,6 +4,7 @@ import Button from "@/components/atoms/Button";
 import Typography from "@/components/atoms/Typography";
 import { UserInfoInterface } from "@/features/Account/types/Account.type";
 import InputRow from "@/features/Admin/components/InputRow";
+import editUserInfo from "@/features/Admin/services/editUserInfo.service";
 import { FormProvider, useForm } from "react-hook-form";
 
 interface AdminFormProps {
@@ -17,6 +18,7 @@ interface AdminFormInput {
   instagram: string;
   github: string;
   personalUrl: string;
+  color: string;
 }
 
 export default function AdminForm({ userInfo }: AdminFormProps) {
@@ -28,11 +30,21 @@ export default function AdminForm({ userInfo }: AdminFormProps) {
       instagram: userInfo.instagram,
       github: userInfo.githubUrl,
       personalUrl: userInfo.personalUrl,
+      color: userInfo.color,
     },
   });
 
   const handleSubmit = async (data: AdminFormInput) => {
-    console.table(data);
+    const result = await editUserInfo({ data });
+
+    if (result.code === "01") {
+      alert("회원정보 변경이 완료되었습니다.");
+      return;
+    }
+
+    alert(
+      "일시적 오류로 정보가 변경되지 않았습니다.\n잠시 후 다시 시도해주세요"
+    );
   };
 
   return (
