@@ -15,11 +15,13 @@ interface ImageFormProps {
 export default function ImageForm({ userInfo }: ImageFormProps) {
   const methods = useForm();
   const router = useRouter();
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
+  const nullimg = "/images/nullprofile.webp";
+
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [formData, setFormData] = useState<FormData>(new FormData());
-  const [profileImage, setProfileImage] = useState<string>(
-    userInfo.images.profileImage
+  const [profileImage, setProfileImage] = useState<string | ArrayBuffer | null>(
+    ""
   );
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -39,6 +41,15 @@ export default function ImageForm({ userInfo }: ImageFormProps) {
       newFormData.append("file", uploadFile);
       setFormData(newFormData);
       console.log(formData);
+
+      const render = new FileReader();
+      render.readAsDataURL(uploadFile);
+      render.onload = (e) => {
+        if (render.readyState === 2) {
+          const imgUrl = e.target!.result;
+          setProfileImage(imgUrl);
+        }
+      };
     }
   };
 
@@ -89,12 +100,18 @@ export default function ImageForm({ userInfo }: ImageFormProps) {
           </Modal.Header>
           <Modal.Content className="flex flex-col items-center justify-center">
             <div>
-              <Image
-                alt="profile image"
-                src={profileImage}
-                height={140}
-                width={140}
-              />
+              <div className="relative mb-[30px] size-[100px] overflow-hidden rounded-full">
+                <Image
+                  alt="profile"
+                  src={
+                    profileImage && typeof profileImage === "string"
+                      ? profileImage
+                      : nullimg
+                  }
+                  className="object-cover"
+                  fill
+                />
+              </div>
             </div>
             <input
               type="file"
@@ -103,20 +120,22 @@ export default function ImageForm({ userInfo }: ImageFormProps) {
               ref={fileInputRef}
               className="hidden"
             />
-            <Button.Default
-              onClick={handleEditButtonClick}
-              type="button"
-              className="w-full"
-            >
-              사진 선택하기
-            </Button.Default>
-            <Button.Default
-              onClick={handleDeleteImage}
-              type="button"
-              className="w-full"
-            >
-              사진 삭제하기
-            </Button.Default>
+            <div className="flex w-full flex-col gap-2">
+              <Button.Default
+                onClick={handleEditButtonClick}
+                type="button"
+                className="w-full"
+              >
+                사진 선택하기
+              </Button.Default>
+              <Button.Default
+                onClick={handleDeleteImage}
+                type="button"
+                className="w-full"
+              >
+                사진 삭제하기
+              </Button.Default>
+            </div>
             <div className="mt-5 flex gap-2">
               <Button.Default>확인</Button.Default>
               <Button.Default type="button">취소</Button.Default>
