@@ -1,25 +1,26 @@
+"use client";
 import Divider from "@/components/atoms/Divider";
 import Typography from "@/components/atoms/Typography";
 import Image from "next/image";
-import { UserInfoInterface } from "../types/Account.type";
+import useUserStore from "../store/userStore";
 import PersonalUrl from "./PersonalUrl";
 import ProfileDetail from "./ProfileDetail";
 import SocialInfo from "./SocialInfo";
 
-interface AccountComponentProps {
-  userInfo: UserInfoInterface;
-}
+const AccountComponent = () => {
+  const { userInfo } = useUserStore();
 
-const AccountComponent = ({ userInfo }: AccountComponentProps) => {
   return (
     <div className="flex w-[400px] flex-col items-center justify-center p-[30px]">
       <div className="relative mb-[30px] size-[150px] overflow-hidden rounded-full">
-        <Image
-          alt="profile"
-          src={userInfo.images.profileImage}
-          className="object-cover"
-          fill
-        />
+        {userInfo.images.profileImage && (
+          <Image
+            alt="profile"
+            src={userInfo.images.profileImage}
+            className="object-cover"
+            fill
+          />
+        )}
       </div>
       <div className="mb-[20px] flex flex-col items-center gap-1">
         <Typography.SubTitle1 className="text-[30px] font-bold">

@@ -2,6 +2,7 @@
 import QueryClientProvider from "@/app/queryClientProvider";
 import Header from "@/components/molecules/Header";
 import { cn } from "@/lib/utils";
+import AppInitializer from "@/shared/components/AppInitializer";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { usePathname } from "next/navigation";
 import { RecoilRoot } from "recoil";
@@ -33,6 +34,7 @@ export default function RootLayout({
                 showHeader && "mt-[100px]"
               )}
             >
+              <AppInitializer />
               {children}
               <div id="portal" />
             </div>
