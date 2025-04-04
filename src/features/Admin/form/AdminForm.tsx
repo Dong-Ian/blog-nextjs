@@ -2,6 +2,7 @@
 
 import Button from "@/components/atoms/Button";
 import Typography from "@/components/atoms/Typography";
+import getAccount from "@/features/Account/services/getAccount.service";
 import useUserStore from "@/features/Account/store/userStore";
 import InputRow from "@/features/Admin/components/InputRow";
 import editUserInfo from "@/features/Admin/services/editUserInfo.service";
@@ -20,7 +21,7 @@ interface AdminFormInput {
 }
 
 export default function AdminForm() {
-  const { userInfo } = useUserStore();
+  const { userInfo, setUser } = useUserStore();
 
   const methods = useForm({
     defaultValues: {
@@ -40,6 +41,9 @@ export default function AdminForm() {
 
     if (result.code === "01") {
       alert("회원정보 변경이 완료되었습니다.");
+      getAccount().then((user) => {
+        setUser(user);
+      });
       return;
     }
 
