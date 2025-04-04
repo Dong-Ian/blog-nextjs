@@ -2,7 +2,7 @@
 import Button from "@/components/atoms/Button";
 import Modal from "@/components/atoms/Modal";
 import getAccount from "@/features/Account/services/getAccount.service";
-import useUserStore from "@/features/Account/store/userStore";
+import useUserStore from "@/features/Account/stores/userStore";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";

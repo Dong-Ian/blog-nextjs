@@ -2,7 +2,7 @@
 
 import Button from "@/components/atoms/Button";
 import getAccount from "@/features/Account/services/getAccount.service";
-import useUserStore from "@/features/Account/store/userStore";
+import useUserStore from "@/features/Account/stores/userStore";
 import InputRow from "@/features/Admin/components/InputRow";
 import editUserInfo from "@/features/Admin/services/editUserInfo.service";
 import { FormProvider, useForm } from "react-hook-form";
