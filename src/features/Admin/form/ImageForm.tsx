@@ -1,19 +1,17 @@
 "use client";
-
 import Button from "@/components/atoms/Button";
 import Modal from "@/components/atoms/Modal";
-import { UserInfoInterface } from "@/features/Account/types/Account.type";
+import getAccount from "@/features/Account/services/getAccount.service";
+import useUserStore from "@/features/Account/store/userStore";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import editProfileImage from "../services/editProfileImage.service";
 
-interface ImageFormProps {
-  userInfo: UserInfoInterface;
-}
-
-export default function ImageForm({ userInfo }: ImageFormProps) {
+export default function ImageForm() {
   const router = useRouter();
+  const { userInfo, setUser } = useUserStore();
+
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [formData, setFormData] = useState<FormData>(new FormData());
   const [previewImage, setPreviewImage] = useState<string>("");
@@ -82,6 +80,9 @@ export default function ImageForm({ userInfo }: ImageFormProps) {
 
     if (reuslt.code === "01") {
       setIsModalOpen(false);
+      getAccount().then((user) => {
+        setUser(user);
+      });
       return;
     }
   };
