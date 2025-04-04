@@ -1,6 +1,6 @@
 export default async function getAccount() {
   const result = await fetch(`${process.env.NEXT_PUBLIC_API}/user/profile`, {
-    method: "POST",
+    method: "GET",
     headers: {
       "Content-Type": "application/json",
     },

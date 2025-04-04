@@ -4,8 +4,6 @@ import PinnedPostList from "@/features/PostList/components/PinnedPostList";
 import RecentPostList from "@/features/PostList/components/RecentPostList";
 
 export default async function Home() {
-  // const userInfo = await getAccount();
-
   return (
     <div>
       <div className="flex justify-center">

@@ -2,15 +2,11 @@
 
 import Button from "@/components/atoms/Button";
 import Typography from "@/components/atoms/Typography";
-import { UserInfoInterface } from "@/features/Account/types/Account.type";
+import useUserStore from "@/features/Account/store/userStore";
 import InputRow from "@/features/Admin/components/InputRow";
 import editUserInfo from "@/features/Admin/services/editUserInfo.service";
 import { FormProvider, useForm } from "react-hook-form";
 import ImageForm from "./ImageForm";
-
-interface AdminFormProps {
-  userInfo: UserInfoInterface;
-}
 
 interface AdminFormInput {
   name: string;
@@ -23,7 +19,9 @@ interface AdminFormInput {
   image: FileList | null;
 }
 
-export default function AdminForm({ userInfo }: AdminFormProps) {
+export default function AdminForm() {
+  const { userInfo } = useUserStore();
+
   const methods = useForm({
     defaultValues: {
       name: userInfo.userName,
