@@ -34,6 +34,7 @@ export default function RootLayout({
               )}
             >
               {children}
+              <div id="portal" />
             </div>
           </QueryClientProvider>
         </RecoilRoot>

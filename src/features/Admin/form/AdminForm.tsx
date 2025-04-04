@@ -51,17 +51,17 @@ export default function AdminForm({ userInfo }: AdminFormProps) {
   };
 
   return (
-    <div>
+    <div className=" flex flex-col items-center justify-center">
+      <Typography.SubTitle1 className="mb-6 text-md font-semibold">
+        회원 정보 변경
+      </Typography.SubTitle1>
+
+      <ImageForm userInfo={userInfo} />
       <FormProvider {...methods}>
         <form
           className="flex flex-col items-center"
           onSubmit={methods.handleSubmit(handleSubmit)}
         >
-          <Typography.SubTitle1 className="mb-6 text-md font-semibold">
-            회원 정보 변경
-          </Typography.SubTitle1>
-
-          <ImageForm userInfo={userInfo} />
           <div className="mb-[30px] flex flex-col gap-2">
             <InputRow
               name="name"
