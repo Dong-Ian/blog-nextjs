@@ -5,24 +5,18 @@ import Modal from "@/components/atoms/Modal";
 import { UserInfoInterface } from "@/features/Account/types/Account.type";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React, { useRef, useState } from "react";
-import { FormProvider, useForm } from "react-hook-form";
+import React, { useEffect, useRef, useState } from "react";
+import editProfileImage from "../services/editProfileImage.service";
 
 interface ImageFormProps {
   userInfo: UserInfoInterface;
 }
 
 export default function ImageForm({ userInfo }: ImageFormProps) {
-  const methods = useForm();
   const router = useRouter();
-
-  const nullimg = "/images/nullprofile.webp";
-
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [formData, setFormData] = useState<FormData>(new FormData());
-  const [profileImage, setProfileImage] = useState<string | ArrayBuffer | null>(
-    ""
-  );
+  const [previewImage, setPreviewImage] = useState<string>("");
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -33,29 +27,42 @@ export default function ImageForm({ userInfo }: ImageFormProps) {
   };
 
   const onChangeImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { files } = e.target;
-    const uploadFile = files ? files[0] : null;
+    const file = e.target.files?.[0];
+    if (!file) return;
 
-    if (uploadFile) {
-      const newFormData = new FormData();
-      newFormData.append("file", uploadFile);
-      setFormData(newFormData);
-      console.log(formData);
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setPreviewImage(reader.result as string);
+      }
+    };
 
-      const render = new FileReader();
-      render.readAsDataURL(uploadFile);
-      render.onload = (e) => {
-        if (render.readyState === 2) {
-          const imgUrl = e.target!.result;
-          setProfileImage(imgUrl);
-        }
-      };
-    }
+    const newFormData = new FormData();
+    newFormData.append("file", file);
+    setFormData(newFormData);
   };
 
-  const handleDeleteImage = () => {
-    setFormData(new FormData());
-    setProfileImage("");
+  const setNullImage = async () => {
+    const response = await fetch("/images/nullprofile.webp");
+    const blob = await response.blob();
+    const file = new File([blob], "nullprofile.webp", { type: blob.type });
+
+    const dataTransfer = new DataTransfer();
+    dataTransfer.items.add(file);
+    const fileList = dataTransfer.files;
+
+    if (fileInputRef.current) {
+      fileInputRef.current.files = fileList;
+    }
+
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setPreviewImage(reader.result as string);
+      }
+    };
   };
 
   const handleClick = () => {
@@ -68,58 +75,74 @@ export default function ImageForm({ userInfo }: ImageFormProps) {
     router.back();
   };
 
-  // const handleSubmit = async (data: any) => {
-  //   console.log(data);
-  // };
+  const handleImageSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const reuslt = await editProfileImage({ formData });
+
+    if (reuslt.code === "01") {
+      setIsModalOpen(false);
+      return;
+    }
+  };
+
+  useEffect(() => {
+    if (isModalOpen) {
+      setNullImage();
+    }
+  }, [isModalOpen]);
 
   return (
-    <FormProvider {...methods}>
-      <form
-      //  onSubmit={methods.handleSubmit(handleSubmit)}
-      >
-        <div className="relative">
-          <div className="relative mb-[30px] size-[150px] overflow-hidden rounded-full">
-            <Image
-              alt="profile"
-              src={userInfo.images.profileImage}
-              className="object-cover"
-              fill
-            />
-          </div>
-          <Button.Default
-            type="button"
-            onClick={handleClick}
-            className="absolute bottom-3 right-5 translate-x-1/3 translate-y-1/3 rounded-full bg-white py-[22px]"
-          >
-            <i className="bi bi-gear text-[13px]" />
-          </Button.Default>
+    <div>
+      <div className="relative">
+        <div className="relative mb-[30px] size-[150px] overflow-hidden rounded-full">
+          <Image
+            alt="profile"
+            src={userInfo.images.profileImage}
+            className="object-cover"
+            fill
+          />
         </div>
-        <Modal isOpen={isModalOpen}>
-          <Modal.Header onClose={handleClose}>
-            <i className="bi i-x" />
-          </Modal.Header>
-          <Modal.Content className="flex flex-col items-center justify-center">
-            <div>
-              <div className="relative mb-[30px] size-[100px] overflow-hidden rounded-full">
+        <Button.Default
+          type="button"
+          onClick={handleClick}
+          className="absolute bottom-3 right-5 translate-x-1/3 translate-y-1/3 rounded-full bg-white py-[22px]"
+        >
+          <i className="bi bi-gear text-[13px]" />
+        </Button.Default>
+      </div>
+      <Modal isOpen={isModalOpen}>
+        <Modal.Header onClose={handleClose}>
+          <i className="bi i-x" />
+        </Modal.Header>
+        <Modal.Content>
+          <form
+            className="flex w-full flex-col  items-center justify-center"
+            onSubmit={handleImageSubmit}
+          >
+            <div className="relative mb-[30px] size-[100px] overflow-hidden rounded-full">
+              {previewImage && (
                 <Image
                   alt="profile"
-                  src={
-                    profileImage && typeof profileImage === "string"
-                      ? profileImage
-                      : nullimg
-                  }
+                  src={previewImage}
                   className="object-cover"
                   fill
                 />
-              </div>
+              )}
             </div>
+
             <input
               type="file"
               accept="image/*"
-              onChange={onChangeImageUpload}
-              ref={fileInputRef}
+              onChange={(e) => {
+                onChangeImageUpload(e);
+              }}
+              ref={(e) => {
+                fileInputRef.current = e;
+              }}
               className="hidden"
             />
+
             <div className="flex w-full flex-col gap-2">
               <Button.Default
                 onClick={handleEditButtonClick}
@@ -129,7 +152,7 @@ export default function ImageForm({ userInfo }: ImageFormProps) {
                 사진 선택하기
               </Button.Default>
               <Button.Default
-                onClick={handleDeleteImage}
+                onClick={setNullImage}
                 type="button"
                 className="w-full"
               >
@@ -137,12 +160,14 @@ export default function ImageForm({ userInfo }: ImageFormProps) {
               </Button.Default>
             </div>
             <div className="mt-5 flex gap-2">
-              <Button.Default>확인</Button.Default>
-              <Button.Default type="button">취소</Button.Default>
+              <Button.Default type="submit">확인</Button.Default>
+              <Button.Default type="button" onClick={handleClose}>
+                취소
+              </Button.Default>
             </div>
-          </Modal.Content>
-        </Modal>
-      </form>
-    </FormProvider>
+          </form>
+        </Modal.Content>
+      </Modal>
+    </div>
   );
 }
