@@ -3,17 +3,17 @@ interface getPostProps {
 }
 
 export default async function getPost({ postSeq }: getPostProps) {
-  const result = await fetch(`${process.env.NEXT_PUBLIC_API}/post/contents`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      postSeq: postSeq,
-      blogId: process.env.NEXT_PUBLIC_BLOG_ID,
-    }),
-    next: { revalidate: 60300 },
-  });
+  const result = await fetch(
+    `${process.env.NEXT_PUBLIC_API_TEST}/post/${postSeq}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        BlogId: process.env.NEXT_PUBLIC_BLOG_ID!,
+      },
+      next: { revalidate: 60300 },
+    }
+  );
 
   const res = await result.json();
   return res.postList;
