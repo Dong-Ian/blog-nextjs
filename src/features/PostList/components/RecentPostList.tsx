@@ -23,7 +23,7 @@ const RecentPostList = async ({ page, size }: RecentPostListProps) => {
         </Link>
       </div>
       <div className="flex flex-col gap-2">
-        {postList.unpinnedPostList.map((post: PostInterface) => (
+        {postList.postList.map((post: PostInterface) => (
           <PostItem key={post.postSeq} post={post} />
         ))}
       </div>

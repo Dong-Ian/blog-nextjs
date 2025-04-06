@@ -6,15 +6,13 @@ import {
 // 최신 게시물 목록을 가져오는 함수
 async function getRecentPostList({ page, size }: GetPostListFunctionProps) {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API}/post/list?page=${page}&size=${size}`,
+    `${process.env.NEXT_PUBLIC_API_TEST}/post/list?page=${page}&size=${size}`,
     {
-      method: "POST",
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
+        BlogId: process.env.NEXT_PUBLIC_BLOG_ID!,
       },
-      body: JSON.stringify({
-        blogId: process.env.NEXT_PUBLIC_BLOG_ID,
-      }),
     }
   );
 
@@ -22,29 +20,28 @@ async function getRecentPostList({ page, size }: GetPostListFunctionProps) {
     throw new Error("Failed to fetch recent posts");
   }
 
-  return await response.json();
+  const res = await response.json();
+  return res;
 }
 
 // 고정된 게시물 목록을 가져오는 함수
 async function getPinnedPostList({ page, size }: GetPostListFunctionProps) {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API}/post/list/pinned?page=${page}&size=${size}`,
+    `${process.env.NEXT_PUBLIC_API_TEST}/post/list?pinned=1&page=${page}&size=${size}`,
     {
-      method: "POST",
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
+        BlogId: process.env.NEXT_PUBLIC_BLOG_ID!,
       },
-      body: JSON.stringify({
-        blogId: process.env.NEXT_PUBLIC_BLOG_ID,
-      }),
     }
   );
 
   if (!response.ok) {
     throw new Error("Failed to fetch pinned posts");
   }
-
-  return await response.json();
+  const res = await response.json();
+  return res;
 }
 
 // 카테고리별 게시물 목록을 가져오는 함수

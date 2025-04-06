@@ -11,7 +11,7 @@ export default async function Page({
 
   return (
     <PostListClient
-      posts={res.unpinnedPostList}
+      posts={res.postList}
       totalPages={res.postCount}
       currentPage={page}
     />
