@@ -27,7 +27,7 @@ async function getRecentPostList({ page, size }: GetPostListFunctionProps) {
 // 고정된 게시물 목록을 가져오는 함수
 async function getPinnedPostList({ page, size }: GetPostListFunctionProps) {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_TEST}/post/list?pinned=1&page=${page}&size=${size}`,
+    `${process.env.NEXT_PUBLIC_API_TEST}/post/list?pin=1&page=${page}&size=${size}`,
     {
       method: "GET",
       headers: {
