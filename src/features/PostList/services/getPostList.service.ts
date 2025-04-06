@@ -51,16 +51,13 @@ async function getCategoryPostList({
   size,
 }: GetCategoryPostListFunctionProps) {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API}/post/list/category?page=${page}&size=${size}`,
+    `${process.env.NEXT_PUBLIC_API_TEST}/post/list?category=${category}&page=${page}&size=${size}`,
     {
-      method: "POST",
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
+        BlogId: process.env.NEXT_PUBLIC_BLOG_ID!,
       },
-      body: JSON.stringify({
-        category,
-        blogId: process.env.NEXT_PUBLIC_BLOG_ID,
-      }),
     }
   );
 
@@ -68,7 +65,9 @@ async function getCategoryPostList({
     throw new Error(`Failed to fetch posts in category: ${category}`);
   }
 
-  return await response.json();
+  const res = await response.json();
+
+  return res;
 }
 
 // 태그별 게시물 목록을 가져오는 함수
@@ -78,16 +77,13 @@ async function getTagPostList({
   size,
 }: GetTagPostListFunctionProps) {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API}/post/list/tag?page=${page}&size=${size}`,
+    `${process.env.NEXT_PUBLIC_API_TEST}/post/list?tag=${tag}&page=${page}&size=${size}`,
     {
-      method: "POST",
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
+        BlogId: process.env.NEXT_PUBLIC_BLOG_ID!,
       },
-      body: JSON.stringify({
-        tag,
-        blogId: process.env.NEXT_PUBLIC_BLOG_ID,
-      }),
     }
   );
 
@@ -95,7 +91,9 @@ async function getTagPostList({
     throw new Error(`Failed to fetch posts with tag: ${tag}`);
   }
 
-  return await response.json();
+  const res = await response.json();
+
+  return res;
 }
 
 export {
