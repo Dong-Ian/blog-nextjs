@@ -4,8 +4,8 @@ import Editor from "@/components/atoms/Editor";
 import BackButton from "@/components/molecules/BackButton";
 import { useRouter } from "next/navigation";
 import { FormProvider, useForm } from "react-hook-form";
+import PostingCategory from "../../Category/components/PostingCategory";
 import posting from "../services/posting.service";
-import Category from "./Category";
 import TagList from "./TagList";
 import Title from "./Title";
 
@@ -72,7 +72,7 @@ const PostingForm: React.FC<PostingFromInterface> = ({ categoryList }) => {
             </Button.Default>
           </div>
           <Title />
-          <Category categoryList={categoryList} />
+          <PostingCategory categoryList={categoryList} />
           <TagList />
           <Editor />
           <Button.Default

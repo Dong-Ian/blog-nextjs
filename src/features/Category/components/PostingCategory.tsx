@@ -2,10 +2,10 @@ import Button from "@/components/atoms/Button";
 import Input from "@/components/atoms/Input";
 import { useFormContext } from "react-hook-form";
 
-interface CategoryProps {
+interface PostingCategoryProps {
   categoryList: string[];
 }
-const Category = ({ categoryList }: CategoryProps) => {
+const PostingCategory = ({ categoryList }: PostingCategoryProps) => {
   const methods = useFormContext();
 
   return (
@@ -35,4 +35,4 @@ const Category = ({ categoryList }: CategoryProps) => {
   );
 };
 
-export default Category;
+export default PostingCategory;
