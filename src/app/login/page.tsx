@@ -21,7 +21,7 @@ export default function Login() {
     const result = await login({ email: data.email, password: data.password });
 
     if (result.code === "0000") {
-      setAuth();
+      setAuth(true);
       router.push("/");
       return;
     }

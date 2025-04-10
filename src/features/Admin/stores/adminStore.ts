@@ -3,14 +3,14 @@ import { create } from "zustand";
 interface AdminState {
   auth: boolean;
   authInitialized: boolean;
-  setAuth: () => void;
+  setAuth: (state: boolean) => void;
   setAuthInitialized: () => void;
 }
 
 const useAdminStore = create<AdminState>((set) => ({
   auth: false,
   authInitialized: false,
-  setAuth: () => set({ auth: true }),
+  setAuth: (state) => set({ auth: state }),
   setAuthInitialized: () => set({ authInitialized: true }),
 }));
 

@@ -27,11 +27,11 @@ export default function ClientPost({ post }: ClientPostProps) {
         <div className="m-auto w-[90%] max-w-[700px]">
           <BackButton.Back />
           <PostHeader post={post} />
-          {auth && <PostAction />}
+          {auth && <PostAction post={post} />}
           <Divider width={100} />
           <PostContents post={post} />
           <Divider width={100} />
-          {auth && <PostAction />}
+          {auth && <PostAction post={post} />}
           <PostComment post={post} />
         </div>
       </div>

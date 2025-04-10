@@ -2,7 +2,7 @@ import { AuthPostProps } from "../type/Post.type";
 
 export default async function pin({ postSeq }: AuthPostProps) {
   const result = await fetch(
-    `${process.env.REACT_APP_API}/admin/post/update/pin`,
+    `${process.env.NEXT_PUBLIC_API}/admin/post/update/pin`,
     {
       method: "POST",
       headers: {
@@ -11,7 +11,7 @@ export default async function pin({ postSeq }: AuthPostProps) {
       credentials: "include",
       body: JSON.stringify({
         postSeq: postSeq,
-        blogId: process.env.REACT_APP_BLOG_ID,
+        blogId: process.env.NEXT_PUBLIC_BLOG_ID,
       }),
     }
   );

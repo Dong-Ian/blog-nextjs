@@ -30,10 +30,11 @@ export default function AppInitializer() {
     const result = await checkToken();
 
     if (result.result) {
-      setAuth();
+      setAuth(true);
       setAuthInitialized();
       return;
     }
+    setAuth(false);
   };
 
   useEffect(() => {
