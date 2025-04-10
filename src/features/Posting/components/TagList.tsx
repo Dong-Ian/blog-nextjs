@@ -4,9 +4,12 @@ import Typography from "@/components/atoms/Typography";
 import React, { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
-const TagList = () => {
+interface TagListProps {
+  prevTagList?: string[];
+}
+const TagList = ({ prevTagList }: TagListProps) => {
   const [tagElement, setTagElement] = useState("");
-  const [tagList, setTagList] = useState<string[]>([]);
+  const [tagList, setTagList] = useState<string[]>(prevTagList || []);
   const [isComposing, setIsComposing] = useState(false);
 
   const handleCompositionStart = () => setIsComposing(true);

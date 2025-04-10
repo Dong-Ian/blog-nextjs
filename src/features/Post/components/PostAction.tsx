@@ -47,6 +47,12 @@ const PostAction = ({ post }: PostActionProps) => {
     }
   };
 
+  const handleEditPost = async () => {
+    if (window.confirm("게시글을 수정하시겠습니까?")) {
+      router.push(`/editpost/${post.postSeq}`);
+    }
+  };
+
   return (
     <div className="flex justify-end py-[10px] ">
       <div className="flex cursor-pointer gap-3">
@@ -59,7 +65,9 @@ const PostAction = ({ post }: PostActionProps) => {
             게시글 고정 해제하기
           </Button.Default>
         )}
-        <Button.Default className="">수정</Button.Default>
+        <Button.Default onClick={handleEditPost} className="">
+          수정
+        </Button.Default>
         <Button.Default onClick={handleDeletePost} className="">
           삭제
         </Button.Default>
