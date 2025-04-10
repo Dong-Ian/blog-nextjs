@@ -2,6 +2,7 @@
 import Button from "@/components/atoms/Button";
 import Input from "@/components/atoms/Input";
 import Typography from "@/components/atoms/Typography";
+import useAdminStore from "@/features/Admin/stores/adminStore";
 import login from "@/features/Login/services/login.service";
 import { useRouter } from "next/navigation";
 import { FormProvider, useForm } from "react-hook-form";
@@ -14,11 +15,13 @@ interface LoginFormInput {
 export default function Login() {
   const router = useRouter();
   const methods = useForm<LoginFormInput>();
+  const { setAuth } = useAdminStore();
 
   const handleLogin = async (data: LoginFormInput) => {
     const result = await login({ email: data.email, password: data.password });
 
     if (result.code === "0000") {
+      setAuth();
       router.push("/");
       return;
     }

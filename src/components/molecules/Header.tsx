@@ -1,5 +1,6 @@
 "use client";
 import URL from "@/constants/URL";
+import useAdminStore from "@/features/Admin/stores/adminStore";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
@@ -9,6 +10,7 @@ import Typography from "../atoms/Typography";
 const Header = () => {
   const [hidden, setHidden] = useState(false);
   const lastScrollY = useRef(0);
+  const { auth } = useAdminStore();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,16 +40,18 @@ const Header = () => {
       <Link href={URL.HOME}>
         <Typography.Head1 className="text-[34px]">Archive</Typography.Head1>
       </Link>
-      <div className="flex items-center justify-center gap-5">
-        <Link href={"/admin"}>
-          <i className="bi bi-person-circle align-middle text-[30px]"></i>
-        </Link>
-        <Link href={"/posting"}>
-          <Button.Default className="h-[33px] rounded-full border-solid border-black bg-transparent hover:bg-black hover:text-white">
-            Posting
-          </Button.Default>
-        </Link>
-      </div>
+      {auth && (
+        <div className="flex items-center justify-center gap-5">
+          <Link href={"/admin"}>
+            <i className="bi bi-person-circle align-middle text-[30px]"></i>
+          </Link>
+          <Link href={"/posting"}>
+            <Button.Default className="h-[33px] rounded-full border-solid border-black bg-transparent hover:bg-black hover:text-white">
+              Posting
+            </Button.Default>
+          </Link>
+        </div>
+      )}
     </header>
   );
 };

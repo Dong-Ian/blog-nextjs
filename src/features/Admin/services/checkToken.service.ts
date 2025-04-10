@@ -1,4 +1,4 @@
-export async function chcekToken() {
+export async function checkToken() {
   const result = await fetch(
     `${process.env.NEXT_PUBLIC_API}/admin/token/check`,
     {
