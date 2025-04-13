@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import AppInitializer from "@/shared/components/AppInitializer";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { usePathname } from "next/navigation";
-import { RecoilRoot } from "recoil";
+
 import "../styles/global.css";
 
 export default function RootLayout({
@@ -25,21 +25,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body suppressHydrationWarning>
-        <RecoilRoot>
-          <QueryClientProvider>
-            {showHeader && <Header />}
-            <div
-              className={cn(
-                "flex w-full items-center justify-center",
-                showHeader && "mt-[100px]"
-              )}
-            >
-              <AppInitializer />
-              {children}
-              <div id="portal" />
-            </div>
-          </QueryClientProvider>
-        </RecoilRoot>
+        <QueryClientProvider>
+          {showHeader && <Header />}
+          <div
+            className={cn(
+              "flex w-full items-center justify-center",
+              showHeader && "mt-[100px]"
+            )}
+          >
+            <AppInitializer />
+            {children}
+            <div id="portal" />
+          </div>
+        </QueryClientProvider>
       </body>
     </html>
   );

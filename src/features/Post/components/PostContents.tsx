@@ -1,7 +1,5 @@
-import { PostParams } from "../type/Post.type";
-
 import MDEditor from "@uiw/react-md-editor";
-import "@uiw/react-md-editor/markdown-editor.css";
+import { PostParams } from "../type/Post.type";
 
 const PostContents = ({ post }: PostParams) => {
   return (
