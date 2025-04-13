@@ -1,5 +1,6 @@
 import getPost from "@/features/Post/services/getPost.service";
 import { PostInterface } from "@/features/Post/type/Post.type";
+import { getCategoryPostList } from "@/features/PostList/services/getPostList.service";
 import { Metadata } from "next";
 import ClientPost from "./ClientPost";
 
@@ -8,7 +9,8 @@ export async function generateMetadata({
 }: {
   params: { postSeq: string };
 }): Promise<Metadata> {
-  const post: PostInterface = await getPost({ postSeq: params.postSeq });
+  const postSeq = (await params).postSeq;
+  const post: PostInterface = await getPost({ postSeq: postSeq });
 
   const plainText = post.postContents
     .replace(/[#>*\[\]\(\)_`\-]/g, "")
@@ -34,12 +36,16 @@ export default async function Post({
 }: {
   params: { postSeq: string };
 }) {
-  const postSeq = params.postSeq;
+  const postSeq = (await params).postSeq;
   const post: PostInterface = await getPost({ postSeq });
+  const relatedPosts =
+    post.category !== undefined
+      ? await getCategoryPostList({ page: 1, size: 5, category: post.category })
+      : [];
 
   return (
-    <article>
-      <ClientPost post={post} />
+    <article className="w-full max-w-screen-md">
+      <ClientPost post={post} relatedPosts={relatedPosts.postList} />
     </article>
   );
 }

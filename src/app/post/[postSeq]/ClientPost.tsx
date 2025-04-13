@@ -3,6 +3,7 @@ import Divider from "@/components/atoms/Divider";
 import BackButton from "@/components/molecules/BackButton";
 import AccountComponent from "@/features/Account/components/AccountComponent";
 import useAdminStore from "@/features/Admin/stores/adminStore";
+import RelatedPostsByCategory from "@/features/Category/components/RelatedPostsByCategory";
 import PostAction from "@/features/Post/components/PostAction";
 import PostComment from "@/features/Post/components/PostComment";
 import PostContents from "@/features/Post/components/PostContents";
@@ -12,9 +13,10 @@ import { PostInterface } from "@/features/Post/type/Post.type";
 
 interface ClientPostProps {
   post: PostInterface;
+  relatedPosts: PostInterface[];
 }
 
-export default function ClientPost({ post }: ClientPostProps) {
+export default function ClientPost({ post, relatedPosts }: ClientPostProps) {
   const { auth } = useAdminStore();
 
   if (auth) {
@@ -30,6 +32,11 @@ export default function ClientPost({ post }: ClientPostProps) {
           {auth && <PostAction post={post} />}
           <Divider width={100} />
           <PostContents post={post} />
+          <Divider width={100} />
+          <RelatedPostsByCategory
+            category={post.category}
+            relatedPostList={relatedPosts}
+          />
           <Divider width={100} />
           {auth && <PostAction post={post} />}
           <PostComment post={post} />
