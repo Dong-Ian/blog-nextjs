@@ -10,5 +10,10 @@ export default async function Post({
   const postSeq = (await params).postSeq;
   const post: PostInterface = await getPost({ postSeq: postSeq });
 
-  return <ClientPost post={post} />;
+  return (
+    <>
+      <title>{post.postTitle}</title>
+      <ClientPost post={post} />
+    </>
+  );
 }

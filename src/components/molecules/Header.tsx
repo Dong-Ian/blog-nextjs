@@ -1,5 +1,6 @@
 "use client";
 import URL from "@/constants/URL";
+import useUserStore from "@/features/Account/stores/userStore";
 import useAdminStore from "@/features/Admin/stores/adminStore";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
@@ -11,6 +12,7 @@ const Header = () => {
   const [hidden, setHidden] = useState(false);
   const lastScrollY = useRef(0);
   const { auth } = useAdminStore();
+  const { userInfo } = useUserStore();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,7 +40,9 @@ const Header = () => {
       )}
     >
       <Link href={URL.HOME}>
-        <Typography.Head1 className="text-[34px]">Archive</Typography.Head1>
+        <Typography.Head1 className="text-[34px]">
+          {userInfo.title}
+        </Typography.Head1>
       </Link>
       {auth && (
         <div className="flex items-center justify-center gap-5">
