@@ -19,29 +19,28 @@ interface ClientPostProps {
 export default function ClientPost({ post, relatedPosts }: ClientPostProps) {
   const { auth } = useAdminStore();
 
-  if (auth) {
-    return (
-      <div className="flex w-full justify-center">
-        <ScrollToBottomButton />
-        <div className="hidden lg:fixed lg:left-0 lg:top-40 lg:block">
-          <AccountComponent />
-        </div>
-        <div className="m-auto w-[90%] max-w-[700px]">
-          <BackButton.Back />
-          <PostHeader post={post} />
-          {auth && <PostAction post={post} />}
-          <Divider width={100} />
-          <PostContents post={post} />
-          <Divider width={100} />
-          <RelatedPostsByCategory
-            category={post.category}
-            relatedPostList={relatedPosts}
-          />
-          <Divider width={100} />
-          {auth && <PostAction post={post} />}
-          <PostComment post={post} />
-        </div>
+  return (
+    <div className="flex w-full justify-center">
+      <ScrollToBottomButton />
+      <div className="hidden lg:fixed lg:left-0 lg:top-40 lg:block">
+        <AccountComponent />
       </div>
-    );
-  }
+      <div className="m-auto w-[90%] max-w-[700px]">
+        <BackButton.Back />
+        <PostHeader post={post} />
+        {auth && <PostAction post={post} />}
+        <Divider width={100} />
+        <PostContents post={post} />
+        <Divider width={100} />
+        <RelatedPostsByCategory
+          category={post.category}
+          relatedPostList={relatedPosts}
+        />
+        <Divider width={100} />
+        {auth && <PostAction post={post} />}
+        <PostComment post={post} />
+      </div>
+    </div>
+  );
+  // }
 }
