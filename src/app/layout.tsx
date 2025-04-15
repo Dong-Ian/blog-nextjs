@@ -6,7 +6,7 @@ import { Metadata } from "next";
 import "../styles/global.css";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const env = process.env.NEXT_PUBLIC_ENV;
+  const env = process.env.ENV;
 
   return {
     title: env === "IAN" ? "Archive" : "Tech Blog",

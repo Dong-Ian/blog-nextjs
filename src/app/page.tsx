@@ -1,12 +1,14 @@
 import Divider from "@/components/atoms/Divider";
 import AccountComponent from "@/features/Account/components/AccountComponent";
 import getAccount from "@/features/Account/services/getAccount.service";
+import MainPageCategory from "@/features/Category/components/MainPageCategory";
+import getCategoryList from "@/features/Category/services/getCategoryList.service";
 import PinnedPostList from "@/features/PostList/components/PinnedPostList";
 import RecentPostList from "@/features/PostList/components/RecentPostList";
 
 export default async function Home() {
   const userInfo = await getAccount();
-
+  const categoryList = await getCategoryList();
   return (
     <div>
       <title>{userInfo.title}</title>
@@ -20,6 +22,9 @@ export default async function Home() {
           <Divider width={100} />
           <RecentPostList page={1} size={5} />
         </div>
+      </div>
+      <div className="hidden lg:fixed lg:right-0 lg:top-40 lg:block">
+        <MainPageCategory categoryList={categoryList} />
       </div>
     </div>
   );
