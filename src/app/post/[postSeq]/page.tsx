@@ -9,28 +9,28 @@ type PageProps = {
   params: { postSeq: string };
 };
 
-export async function generateMetadata({ params }: PageProps) {
-  const postSeq = params.postSeq;
-  const post: PostInterface = await getPost({ postSeq: postSeq });
+// export async function generateMetadata({ params }: PageProps) {
+//   const postSeq = params.postSeq;
+//   const post: PostInterface = await getPost({ postSeq: postSeq });
 
-  const plainText = post.postContents
-    .replace(/[#>*\[\]\(\)_`\-]/g, "")
-    .slice(0, 160);
+//   const plainText = post.postContents
+//     .replace(/[#>*\[\]\(\)_`\-]/g, "")
+//     .slice(0, 160);
 
-  return {
-    title: post.postTitle,
-    description: plainText,
-    keywords: [
-      ...(post.tags || []),
-      post.categoryName || post.category || "",
-    ].join(", "),
-    openGraph: {
-      title: post.postTitle,
-      description: plainText,
-      type: "article",
-    },
-  };
-}
+//   return {
+//     title: post.postTitle,
+//     description: plainText,
+//     keywords: [
+//       ...(post.tags || []),
+//       post.categoryName || post.category || "",
+//     ].join(", "),
+//     openGraph: {
+//       title: post.postTitle,
+//       description: plainText,
+//       type: "article",
+//     },
+//   };
+// }
 
 export default async function Post({ params }: PageProps) {
   const postSeq = (await params).postSeq;
