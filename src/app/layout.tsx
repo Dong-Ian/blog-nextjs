@@ -9,13 +9,13 @@ export async function generateMetadata(): Promise<Metadata> {
   const env = process.env.ENV;
 
   return {
-    title: env === "IAN" ? "Archive" : "Tech Blog",
+    title: "Archive",
     description:
       env === "IAN"
         ? "최신 프론트엔드 트렌드를 바탕으로 효율적인 개발 방법과 실무 경험을 나눕니다."
         : "동현이의 개발 블로그",
     icons: {
-      icon: env === "IAN" ? "/favicon/minsook.ico" : "/favicon/dong.ico",
+      icon: "/favicon/minsook.ico",
     },
   };
 }
