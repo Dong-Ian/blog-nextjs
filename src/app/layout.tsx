@@ -16,23 +16,22 @@ import "../styles/global.css";
 //   };
 // }
 
-export default function RootLayout() {
-//   {
-//   children,
-// }: {
-//   children: React.ReactNode;
-// }
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
       <body suppressHydrationWarning>
-        {/* <QueryClientProvider>
-          <HeaderWrapper />
-          <div className="flex w-full items-center justify-center">
-            <AppInitializer />
-            {children}
-            <div id="portal" />
-          </div>
-        </QueryClientProvider> */}
+        {/* <QueryClientProvider> */}
+        {/* <HeaderWrapper /> */}
+        <div className="flex w-full items-center justify-center">
+          {/* <AppInitializer /> */}
+          {children}
+          <div id="portal" />
+        </div>
+        {/* </QueryClientProvider>  */}
       </body>
     </html>
   );
