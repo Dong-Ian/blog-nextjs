@@ -1,13 +1,17 @@
 export async function checkToken() {
-  const result = await fetch(
-    `${process.env.NEXT_PUBLIC_API}/admin/token/check`,
-    {
-      method: "GET",
-      credentials: "include",
-    }
-  );
+  try {
+    const result = await fetch(
+      `${process.env.NEXT_PUBLIC_API}/admin/token/check`,
+      {
+        method: "GET",
+        credentials: "include",
+      }
+    );
 
-  const res = await result.json();
+    const res = await result.json();
 
-  return res;
+    return res;
+  } catch (e) {
+    console.error("checkToken", e);
+  }
 }
