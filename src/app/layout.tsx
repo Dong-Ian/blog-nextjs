@@ -14,6 +14,9 @@ export async function generateMetadata(): Promise<Metadata> {
       env === "IAN"
         ? "최신 프론트엔드 트렌드를 바탕으로 효율적인 개발 방법과 실무 경험을 나눕니다."
         : "동현이의 개발 블로그",
+    icons: {
+      icon: env === "IAN" ? "/favicon/minsook.ico" : "/favicon/dong.ico",
+    },
   };
 }
 
@@ -22,15 +25,8 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const env = process.env.NEXT_PUBLIC_BLOG_ID;
-  const faviconPath =
-    env === "IAN" ? "/favicon/minsook.ico" : "/favicon/dong.ico";
-
   return (
     <html lang="en">
-      <head>
-        <link rel="icon" href={faviconPath} />
-      </head>
       <body suppressHydrationWarning>
         <QueryClientProvider>
           <HeaderWrapper />
