@@ -31,7 +31,7 @@ export default function Login() {
 
   if (userInfo) {
     return (
-      <div className="flex h-screen w-full flex-col items-center justify-center bg-black">
+      <div className="flex h-screen w-full flex-col items-center justify-center">
         <div className="m-auto flex w-full flex-col items-center justify-center">
           <FormProvider {...methods}>
             <form
@@ -39,7 +39,7 @@ export default function Login() {
               className="flex w-[90%] max-w-[700px] flex-col items-center justify-center gap-2 rounded-xl border border-solid bg-white p-[40px]"
             >
               <h1 className="mb-10 text-center font-serif text-5xl font-bold">
-                Welcome to {userInfo.title}
+                Login
               </h1>
               <div className="mb-[10px] flex w-full flex-col justify-start gap-2">
                 <Typography.P3 className="ml-1 w-[80px]">이메일</Typography.P3>
@@ -64,7 +64,7 @@ export default function Login() {
                 />
                 <div className="border-b " />
               </div>
-              <Button.Default className="mt-[30px] h-[50px] w-full rounded-full bg-black text-md font-semibold  text-white">
+              <Button.Default className="mt-[30px] h-[50px] w-full rounded-full text-md font-semibold transition-all hover:bg-gray-100">
                 로그인
               </Button.Default>
             </form>
