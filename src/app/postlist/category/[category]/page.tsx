@@ -50,10 +50,14 @@ export default async function TagPostList({
       />
     );
   } catch (error: unknown) {
-    console.error(
-      "❌ [SERVER ERROR] TagPostList 렌더링 중 에러:",
-      error?.message || error
-    );
+    if (error instanceof Error) {
+      console.error(
+        "❌ [SERVER ERROR] TagPostList 렌더링 중 에러:",
+        error.message
+      );
+    } else {
+      console.error("❌ [SERVER ERROR] TagPostList 알 수 없는 에러:", error);
+    }
     throw error;
   }
 }
