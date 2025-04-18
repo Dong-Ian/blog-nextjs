@@ -1,5 +1,4 @@
 import Divider from "@/components/atoms/Divider";
-import AccountComponent from "@/features/Account/components/AccountComponent";
 import MainPageCategory from "@/features/Category/components/MainPageCategory";
 import getCategoryList from "@/features/Category/services/getCategoryList.service";
 import PinnedPostList from "@/features/PostList/components/PinnedPostList";
@@ -11,7 +10,7 @@ export default async function Home() {
     <div>
       <div className="flex justify-center">
         <div className="hidden lg:fixed lg:left-0 lg:top-40 lg:block">
-          <AccountComponent />
+          {/* <AccountComponent /> */}
         </div>
 
         <div className="flex w-full max-w-[760px] flex-col gap-6 px-4">
