@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import getPost from "@/features/Post/services/getPost.service";
 import { PostInterface } from "@/features/Post/type/Post.type";
 import { getCategoryPostList } from "@/features/PostList/services/getPostList.service";
@@ -47,5 +49,3 @@ export default async function Post({ params }: { params: PageParams }) {
     </article>
   );
 }
-
-export const dynamic = "force-dynamic";

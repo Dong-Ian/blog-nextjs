@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { getTagPostList } from "@/features/PostList/services/getPostList.service";
 import PostListClient from "./PostListClient";
 
@@ -37,5 +39,3 @@ export default async function TagPostList({
     />
   );
 }
-
-export const dynamic = "force-dynamic";

@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import getCategoryList from "@/features/Category/services/getCategoryList.service";
 import getPost from "@/features/Post/services/getPost.service";
 import { PostInterface } from "@/features/Post/type/Post.type";
@@ -12,5 +14,3 @@ export default async function EditPost({ params }: { params: PageParams }) {
 
   return <EditPostingForm post={post} categoryList={categoryList} />;
 }
-
-export const dynamic = "force-dynamic";
