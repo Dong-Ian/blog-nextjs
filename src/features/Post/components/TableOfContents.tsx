@@ -30,12 +30,13 @@ const TableOfContents = ({ title }: ToCProps) => {
 
     setTocItems(extracted);
   }, []);
+
   if (tocItems.length >= 1) {
     return (
       <div className="flex w-[380px] flex-col gap-2 border-l-2 px-7">
         <p className="text-[20px] font-bold">{title}</p>
         <ul className="space-y-1 text-sm">
-          {tocItems.map((item, idx) => (
+          {tocItems.map((item: TOCItem, idx: number) => (
             <li
               key={idx}
               style={{

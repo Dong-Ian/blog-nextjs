@@ -1,7 +1,7 @@
 import Button from "@/components/atoms/Button";
 import Modal, { ModalProps } from "@/components/atoms/Modal";
 import Typography from "@/components/atoms/Typography";
-import cn from "@/utils/cn";
+import { cn } from "@/lib/utils";
 
 interface ConfirmModalProps extends ModalProps {
   type: "danger" | "action";

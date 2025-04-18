@@ -1,24 +1,39 @@
 import { getCategoryPostList } from "@/features/PostList/services/getPostList.service";
 import PostListClient from "./PostListClient";
 
+type PageParams = Promise<{
+  category: string;
+}>;
+
+type SearchParams = Promise<{
+  page?: string;
+}>;
+
 export default async function TagPostList({
   params,
   searchParams,
 }: {
-  params: { category: string };
-  searchParams: { page?: string };
+  params: PageParams;
+  searchParams: SearchParams;
 }) {
-  const category = decodeURIComponent((await params).category);
-  const page = Number((await searchParams).page ?? 1);
+  const { category } = await params;
+  const { page } = await searchParams;
 
-  const res = await getCategoryPostList({ page, size: 5, category: category });
+  const decodedCategory = decodeURIComponent(category);
+  const currentPage = Number(page ?? "1");
+
+  const res = await getCategoryPostList({
+    page: currentPage,
+    size: 5,
+    category: decodedCategory,
+  });
 
   return (
     <PostListClient
-      category={category}
+      category={decodedCategory}
       posts={res.postList}
       totalPages={res.postCount}
-      currentPage={page}
+      currentPage={currentPage}
     />
   );
 }

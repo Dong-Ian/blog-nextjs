@@ -4,10 +4,12 @@ import { getCategoryPostList } from "@/features/PostList/services/getPostList.se
 import { Metadata } from "next";
 import ClientPost from "./ClientPost";
 
+type PageParams = Promise<{ postSeq: string }>;
+
 export async function generateMetadata({
   params,
 }: {
-  params: { postSeq: string };
+  params: PageParams;
 }): Promise<Metadata> {
   const postSeq = (await params).postSeq;
   const post: PostInterface = await getPost({ postSeq: postSeq });
@@ -31,11 +33,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function Post({
-  params,
-}: {
-  params: { postSeq: string };
-}) {
+export default async function Post({ params }: { params: PageParams }) {
   const postSeq = (await params).postSeq;
   const post: PostInterface = await getPost({ postSeq });
   const relatedPosts =
