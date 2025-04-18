@@ -9,6 +9,7 @@ import PostComment from "@/features/Post/components/PostComment";
 import PostContents from "@/features/Post/components/PostContents";
 import PostHeader from "@/features/Post/components/PostHeader";
 import ScrollToBottomButton from "@/features/Post/components/ScrollToBottomButton";
+import TableOfContents from "@/features/Post/components/TableOfContents";
 import { PostInterface } from "@/features/Post/type/Post.type";
 
 interface ClientPostProps {
@@ -40,7 +41,9 @@ export default function ClientPost({ post, relatedPosts }: ClientPostProps) {
         {auth && <PostAction post={post} />}
         <PostComment post={post} />
       </div>
+      <div className="hidden lg:fixed lg:right-0 lg:top-40 lg:block">
+        <TableOfContents title={post.postTitle} />
+      </div>
     </div>
   );
-  // }
 }
