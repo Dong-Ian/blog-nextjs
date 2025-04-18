@@ -1,8 +1,6 @@
 export const dynamic = "force-dynamic";
 
 import QueryClientProvider from "@/app/queryClientProvider";
-import AppInitializer from "@/shared/utils/AppInitializer";
-import HeaderWrapper from "@/shared/utils/HeaderWrapper";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "../styles/global.css";
 
@@ -30,9 +28,9 @@ export default function RootLayout({
     <html lang="en">
       <body suppressHydrationWarning>
         <QueryClientProvider>
-          <HeaderWrapper />
+          {/* <HeaderWrapper /> */}
           <div className="flex w-full items-center justify-center">
-            <AppInitializer />
+            {/* <AppInitializer /> */}
             {children}
             <div id="portal" />
           </div>
