@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import QueryClientProvider from "@/app/queryClientProvider";
 import AppInitializer from "@/shared/utils/AppInitializer";
 import HeaderWrapper from "@/shared/utils/HeaderWrapper";
