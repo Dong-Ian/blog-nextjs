@@ -36,12 +36,15 @@ const TableOfContents = ({ title }: ToCProps) => {
         <p className="text-[20px] font-bold">{title}</p>
         <ul className="space-y-1 text-sm">
           {tocItems.map((item, idx) => (
-            <li key={idx} className={`ml-${(item.level - 1) * 4} list-none`}>
+            <li
+              key={idx}
+              style={{
+                marginLeft: item.level === 1 ? "0px" : "13px",
+              }}
+              className={`ml-${(item.level - 1) * 4} list-none`}
+            >
               <a
                 href={`${item.href}`}
-                style={{
-                  marginLeft: item.level === 1 ? "0px" : "13px",
-                }}
                 className="text-[16px] leading-7 text-gray-500 transition-all hover:text-sky-300"
               >
                 {item.text}
