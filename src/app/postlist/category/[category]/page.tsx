@@ -18,8 +18,6 @@ export default async function TagPostList({
   params: PageParams;
   searchParams: SearchParams;
 }) {
-  console.log("📌 [SERVER] TagPostList 진입");
-
   try {
     const { category } = params;
     const { page } = searchParams;
