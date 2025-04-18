@@ -1,7 +1,6 @@
 import Button from "@/components/atoms/Button";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import deletePost from "../services/deletePost.service";
 import unpin from "../services/pin.service";
 import pin from "../services/unpin.service";
 import { PostInterface } from "../type/Post.type";
@@ -26,16 +25,16 @@ const PostAction = ({ post }: PostActionProps) => {
     }
   };
 
-  const handleDeletePost = async () => {
-    if (window.confirm("게시글을 삭제하시겠습니까?")) {
-      const result = await deletePost({ postSeq: post.postSeq });
+  // const handleDeletePost = async () => {
+  //   if (window.confirm("게시글을 삭제하시겠습니까?")) {
+  //     const result = await deletePost({ postSeq: post.postSeq });
 
-      if (result.code === "01") {
-        alert("게시글이 삭제되었습니다.");
-        router.replace("/");
-      }
-    }
-  };
+  //     if (result.code === "01") {
+  //       alert("게시글이 삭제되었습니다.");
+  //       router.replace("/");
+  //     }
+  //   }
+  // };
 
   const handleUnPinPost = async () => {
     if (window.confirm("게시글을 고정 해제하시겠습니까?")) {
@@ -68,9 +67,9 @@ const PostAction = ({ post }: PostActionProps) => {
         <Button.Default onClick={handleEditPost} className="">
           수정
         </Button.Default>
-        <Button.Default onClick={handleDeletePost} className="">
+        {/* <Button.Default onClick={handleDeletePost} className="">
           삭제
-        </Button.Default>
+        </Button.Default> */}
       </div>
     </div>
   );

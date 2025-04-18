@@ -6,11 +6,11 @@ import { PostInterface } from "@/features/Post/type/Post.type";
 import EditPostingForm from "@/features/Posting/components/EditPostingForm";
 
 type PageProps = {
-  params: { postSeq: string };
+  params: Promise<{ postSeq: string }>;
 };
 
 export default async function EditPost({ params }: PageProps) {
-  const postSeq = params.postSeq;
+  const { postSeq } = await params;
   const post: PostInterface = await getPost({ postSeq });
   const categoryList = await getCategoryList();
 

@@ -4,13 +4,13 @@ import { getCategoryPostList } from "@/features/PostList/services/getPostList.se
 import PostListClient from "./PostListClient";
 
 type PageProps = {
-  params: { category: string };
-  searchParams: { page?: string };
+  params: Promise<{ category: string }>;
+  searchParams: Promise<{ page?: string }>;
 };
 
 export default async function TagPostList({ params, searchParams }: PageProps) {
-  const { category } = params;
-  const { page } = searchParams;
+  const { category } = await params;
+  const { page } = await searchParams;
 
   const decodedCategory = decodeURIComponent(category);
   const currentPage = Number(page ?? "1");

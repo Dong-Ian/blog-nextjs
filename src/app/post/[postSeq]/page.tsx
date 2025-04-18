@@ -6,7 +6,7 @@ import { getCategoryPostList } from "@/features/PostList/services/getPostList.se
 import ClientPost from "./ClientPost";
 
 type PageProps = {
-  params: { postSeq: string };
+  params: Promise<{ postSeq: string }>;
 };
 
 // export async function generateMetadata({ params }: PageProps) {
@@ -33,7 +33,7 @@ type PageProps = {
 // }
 
 export default async function Post({ params }: PageProps) {
-  const postSeq = (await params).postSeq;
+  const { postSeq } = await params;
   const post: PostInterface = await getPost({ postSeq });
   const relatedPosts =
     post.category !== undefined

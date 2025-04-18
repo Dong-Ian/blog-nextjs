@@ -4,13 +4,13 @@ import { getTagPostList } from "@/features/PostList/services/getPostList.service
 import PostListClient from "./PostListClient";
 
 type PageProps = {
-  params: { tag: string };
-  searchParams: { page?: string };
+  params: Promise<{ tag: string }>;
+  searchParams: Promise<{ page?: string }>;
 };
 
 export default async function TagPostList({ params, searchParams }: PageProps) {
-  const { tag } = params;
-  const { page } = searchParams;
+  const { tag } = await params;
+  const { page } = await searchParams;
 
   const decodedTag = decodeURIComponent(tag);
   const currentPage = Number(page ?? "1");
