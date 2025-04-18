@@ -4,10 +4,7 @@ import getCategoryList from "@/features/Category/services/getCategoryList.servic
 import getPost from "@/features/Post/services/getPost.service";
 import { PostInterface } from "@/features/Post/type/Post.type";
 import EditPostingForm from "@/features/Posting/components/EditPostingForm";
-
-type PageProps = {
-  params: Promise<{ postSeq: string }>;
-};
+import { PageProps } from "@/shared/types/main.type";
 
 export default async function EditPost({ params }: PageProps) {
   const { postSeq } = await params;

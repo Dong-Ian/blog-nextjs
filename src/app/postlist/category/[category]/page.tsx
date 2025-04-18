@@ -1,19 +1,17 @@
 export const dynamic = "force-dynamic";
 
 import { getCategoryPostList } from "@/features/PostList/services/getPostList.service";
+import { CategoryPageProps } from "@/shared/types/main.type";
 import PostListClient from "./PostListClient";
 
-type PageProps = {
-  params: Promise<{ category: string }>;
-  searchParams: Promise<{ page?: string }>;
-};
-
-export default async function TagPostList({ params, searchParams }: PageProps) {
+export default async function TagPostList({
+  params,
+  searchParams,
+}: CategoryPageProps) {
   const { category } = await params;
-  const { page } = await searchParams;
 
   const decodedCategory = decodeURIComponent(category);
-  const currentPage = Number(page ?? "1");
+  const currentPage = Number((await searchParams).page ?? "1");
 
   const res = await getCategoryPostList({
     page: currentPage,
