@@ -11,7 +11,7 @@
 //   );
 
 //   const res = await result.json();
-//   console.log(res);
+
 //   return res.profileResult;
 // }
 
