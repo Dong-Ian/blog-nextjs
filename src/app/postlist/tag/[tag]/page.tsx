@@ -3,13 +3,13 @@ export const dynamic = "force-dynamic";
 import { getTagPostList } from "@/features/PostList/services/getPostList.service";
 import PostListClient from "./PostListClient";
 
-type PageParams = Promise<{
+type PageParams = {
   tag: string;
-}>;
+};
 
-type SearchParams = Promise<{
+type SearchParams = {
   page?: string;
-}>;
+};
 
 export default async function TagPostList({
   params,
@@ -18,8 +18,8 @@ export default async function TagPostList({
   params: PageParams;
   searchParams: SearchParams;
 }) {
-  const { tag } = await params;
-  const { page } = await searchParams;
+  const { tag } = params;
+  const { page } = searchParams;
 
   const decodedTag = decodeURIComponent(tag);
   const currentPage = Number(page ?? "1");

@@ -3,17 +3,12 @@ export const dynamic = "force-dynamic";
 import getPost from "@/features/Post/services/getPost.service";
 import { PostInterface } from "@/features/Post/type/Post.type";
 import { getCategoryPostList } from "@/features/PostList/services/getPostList.service";
-import { Metadata } from "next";
 import ClientPost from "./ClientPost";
 
-type PageParams = Promise<{ postSeq: string }>;
+type PageParams = { postSeq: string };
 
-export async function generateMetadata({
-  params,
-}: {
-  params: PageParams;
-}): Promise<Metadata> {
-  const postSeq = (await params).postSeq;
+export async function generateMetadata({ params }: { params: PageParams }) {
+  const postSeq = params.postSeq;
   const post: PostInterface = await getPost({ postSeq: postSeq });
 
   const plainText = post.postContents

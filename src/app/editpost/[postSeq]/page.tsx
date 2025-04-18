@@ -5,10 +5,10 @@ import getPost from "@/features/Post/services/getPost.service";
 import { PostInterface } from "@/features/Post/type/Post.type";
 import EditPostingForm from "@/features/Posting/components/EditPostingForm";
 
-type PageParams = Promise<{ id: string }>;
+type PageParams = { id: string };
 
 export default async function EditPost({ params }: { params: PageParams }) {
-  const postSeq = (await params).id;
+  const postSeq = params.id;
   const post: PostInterface = await getPost({ postSeq });
   const categoryList = await getCategoryList();
 
