@@ -1,14 +1,14 @@
 export const dynamic = "force-dynamic";
 
 import { getTagPostList } from "@/features/PostList/services/getPostList.service";
+import { TagPageProps } from "@/shared/types/main.type";
 import PostListClient from "./PostListClient";
 
-type PageProps = {
-  params: Promise<{ tag: string }>;
-  searchParams: Promise<{ page?: string }>;
-};
-
-export default async function TagPostList({ params, searchParams }: PageProps) {
+export default async function TagPostList({
+  params,
+  searchParams,
+}: TagPageProps) {
+  if (!searchParams || !params) return null;
   const { tag } = await params;
   const { page } = await searchParams;
 

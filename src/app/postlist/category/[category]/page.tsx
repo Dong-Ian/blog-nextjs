@@ -8,10 +8,12 @@ export default async function TagPostList({
   params,
   searchParams,
 }: CategoryPageProps) {
+  if (!searchParams || !params) return null;
   const { category } = await params;
+  const { page } = await searchParams;
 
   const decodedCategory = decodeURIComponent(category);
-  const currentPage = Number((await searchParams).page ?? "1");
+  const currentPage = Number(page ?? "1");
 
   const res = await getCategoryPostList({
     page: currentPage,

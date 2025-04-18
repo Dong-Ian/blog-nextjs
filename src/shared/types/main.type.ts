@@ -7,6 +7,11 @@ export type CategoryPageProps = {
   searchParams: Promise<{ page?: string }>;
 };
 
+export type TagPageProps = {
+  params: Promise<{ tag: string }>;
+  searchParams: Promise<{ page?: string }>;
+};
+
 export type SearchPageProps = {
   searchParams: Promise<{ page?: string }>;
 };

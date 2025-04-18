@@ -5,6 +5,7 @@ import { SearchPageProps } from "@/shared/types/main.type";
 import PostListClient from "./PostListClient";
 
 export default async function Page({ searchParams }: SearchPageProps) {
+  if (!searchParams) return null;
   const currentPage = Number((await searchParams).page ?? "1");
 
   const res = await getRecentPostList({ page: currentPage, size: 5 });
