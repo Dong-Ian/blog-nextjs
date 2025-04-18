@@ -12,3 +12,5 @@ export default async function EditPost({ params }: { params: PageParams }) {
 
   return <EditPostingForm post={post} categoryList={categoryList} />;
 }
+
+export const dynamic = "force-dynamic";

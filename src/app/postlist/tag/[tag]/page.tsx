@@ -37,3 +37,5 @@ export default async function TagPostList({
     />
   );
 }
+
+export const dynamic = "force-dynamic";

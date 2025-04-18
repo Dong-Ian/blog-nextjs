@@ -47,3 +47,5 @@ export default async function Post({ params }: { params: PageParams }) {
     </article>
   );
 }
+
+export const dynamic = "force-dynamic";
