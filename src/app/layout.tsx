@@ -1,6 +1,3 @@
-import QueryClientProvider from "@/app/queryClientProvider";
-import AppInitializer from "@/shared/utils/AppInitializer";
-import HeaderWrapper from "@/shared/utils/HeaderWrapper";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "../styles/global.css";
 
@@ -19,22 +16,23 @@ import "../styles/global.css";
 //   };
 // }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout() {
+//   {
+//   children,
+// }: {
+//   children: React.ReactNode;
+// }
   return (
     <html lang="en">
       <body suppressHydrationWarning>
-        <QueryClientProvider>
+        {/* <QueryClientProvider>
           <HeaderWrapper />
           <div className="flex w-full items-center justify-center">
             <AppInitializer />
             {children}
             <div id="portal" />
           </div>
-        </QueryClientProvider>
+        </QueryClientProvider> */}
       </body>
     </html>
   );
