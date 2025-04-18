@@ -5,9 +5,11 @@ import { PostInterface } from "@/features/Post/type/Post.type";
 import { getCategoryPostList } from "@/features/PostList/services/getPostList.service";
 import ClientPost from "./ClientPost";
 
-type PageParams = { postSeq: string };
+type PageProps = {
+  params: { postSeq: string };
+};
 
-export async function generateMetadata({ params }: { params: PageParams }) {
+export async function generateMetadata({ params }: PageProps) {
   const postSeq = params.postSeq;
   const post: PostInterface = await getPost({ postSeq: postSeq });
 
@@ -30,7 +32,7 @@ export async function generateMetadata({ params }: { params: PageParams }) {
   };
 }
 
-export default async function Post({ params }: { params: PageParams }) {
+export default async function Post({ params }: PageProps) {
   const postSeq = (await params).postSeq;
   const post: PostInterface = await getPost({ postSeq });
   const relatedPosts =
