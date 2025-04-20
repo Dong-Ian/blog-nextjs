@@ -8,7 +8,7 @@ import { PageProps } from "@/shared/types/main.type";
 
 export default async function EditPost({ params }: PageProps) {
   const { postSeq } = await params;
-  if (!postSeq) return null;
+
   const post: PostInterface = await getPost({ postSeq });
   const categoryList = await getCategoryList();
 

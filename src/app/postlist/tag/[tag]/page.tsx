@@ -8,7 +8,6 @@ export default async function TagPostList({
   params,
   searchParams,
 }: TagPageProps) {
-  if (!searchParams || !params) return null;
   const { tag } = await params;
   const { page } = await searchParams;
 

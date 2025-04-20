@@ -31,7 +31,7 @@ import ClientPost from "./ClientPost";
 
 export default async function Post({ params }: PageProps) {
   const { postSeq } = await params;
-  if (!postSeq) return null;
+
   const post: PostInterface = await getPost({ postSeq });
   const relatedPosts =
     post.category !== undefined
