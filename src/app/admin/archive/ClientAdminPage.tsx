@@ -41,30 +41,36 @@ const ClientAdminPage = ({ currentPage }: ClientAdminPageProps) => {
     router.push(`/admin/archive?page=${selected + 1}`);
   };
 
-  if (archivedPost.length) {
-    return (
-      <div className="flex h-screen w-full justify-center  md:pl-[230px]">
-        <SideBar />
+  return (
+    <div className="flex h-screen w-full justify-center  md:pl-[230px]">
+      <SideBar />
 
-        <div className="mt-[100px] flex w-full max-w-[1000px] flex-col items-center">
-          <Typography.SubTitle1 className="mb-6 text-md font-semibold">
-            보관글 조회
-          </Typography.SubTitle1>
-          <div className="w-[90%] max-w-[800px]">
-            {archivedPost.map((post, index) => (
-              <ArchivedPostItem key={index} post={post} />
-            ))}
+      <div className="mt-[100px] flex w-full max-w-[1000px] flex-col items-center">
+        <Typography.SubTitle1 className="mb-6 text-md font-semibold">
+          보관글 조회
+        </Typography.SubTitle1>
+        {archivedPost.length ? (
+          <div>
+            <div className="w-[90%] max-w-[800px]">
+              {archivedPost.map((post, index) => (
+                <ArchivedPostItem key={index} post={post} />
+              ))}
+            </div>
+            <Pagination
+              currentPage={currentPage}
+              postCount={totalCount}
+              perPage={2}
+              onPageChange={handlePageChange}
+            />
           </div>
-          <Pagination
-            currentPage={currentPage}
-            postCount={totalCount}
-            perPage={2}
-            onPageChange={handlePageChange}
-          />
-        </div>
+        ) : (
+          <Typography.P2 className="text-gray-500">
+            보관된 글이 없습니다.
+          </Typography.P2>
+        )}
       </div>
-    );
-  }
+    </div>
+  );
 };
 
 export default ClientAdminPage;
