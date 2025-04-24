@@ -1,43 +1,44 @@
 "use client";
 
+import { AdminFormInput } from "@/app/admin/info/ClientAdminPage";
 import Button from "@/components/atoms/Button";
 import getAccount from "@/features/Account/services/getAccount.service";
 import useUserStore from "@/features/Account/stores/userStore";
 import InputRow from "@/features/Admin/components/InputRow";
 import editUserInfo from "@/features/Admin/services/editUserInfo.service";
+import { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-
-interface AdminFormInput {
-  name: string;
-  title: string;
-  memo: string;
-  instagram: string;
-  github: string;
-  personalUrl: string;
-  color: string;
-  image: FileList | null;
-}
 
 export default function InfoForm() {
   const { userInfo, setUser } = useUserStore();
-
-  const methods = useForm({
+  const methods = useForm<AdminFormInput>({
     defaultValues: {
-      name: userInfo.userName,
-      title: userInfo.title,
-      memo: userInfo.memo,
-      instagram: userInfo.instagram,
-      github: userInfo.githubUrl,
-      personalUrl: userInfo.personalUrl,
-      color: userInfo.color,
-      image: null,
+      name: "",
+      intro: "",
+      instagramId: "",
+      githubId: "",
+      personalUrl: "",
+      profileImage: "",
     },
   });
+
+  useEffect(() => {
+    if (userInfo) {
+      methods.reset({
+        name: userInfo.name,
+        intro: userInfo.intro,
+        instagramId: userInfo.instagramId,
+        githubId: userInfo.githubId,
+        personalUrl: userInfo.personalUrl,
+        profileImage: userInfo.profileImage,
+      });
+    }
+  }, [userInfo, methods]);
 
   const handleSubmit = async (data: AdminFormInput) => {
     const result = await editUserInfo({ data });
 
-    if (result.code === "01") {
+    if (result.status === 200) {
       alert("회원정보 변경이 완료되었습니다.");
       getAccount().then((user) => {
         setUser(user);
@@ -57,23 +58,22 @@ export default function InfoForm() {
         onSubmit={methods.handleSubmit(handleSubmit)}
       >
         <div className="mb-[30px] flex flex-col gap-2">
-          <InputRow name="name" title="NAME" placeholder={userInfo.userName} />
-          <InputRow name="title" title="TITLE" placeholder={userInfo.title} />
-          <InputRow name="memo" title="MEMO" placeholder={userInfo.memo} />
+          <InputRow name="name" title="NAME" placeholder={userInfo.name} />
+          <InputRow name="intro" title="MEMO" placeholder={userInfo.intro} />
           <InputRow
             name="personalUrl"
             title="URL"
             placeholder={userInfo.personalUrl}
           />
           <InputRow
-            name="instagram"
+            name="instagramId"
             title="Instagram"
-            placeholder={userInfo.instagram}
+            placeholder={userInfo.instagramId}
           />
           <InputRow
-            name="github"
+            name="githubId"
             title="GitHub"
-            placeholder={userInfo.githubUrl}
+            placeholder={userInfo.githubId}
           />
         </div>
         <Button.Default className="rounded-full border border-black hover:bg-black hover:text-white">

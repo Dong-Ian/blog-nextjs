@@ -38,13 +38,17 @@ const Contents = ({ contents }: ContentsProps) => {
   const sliced = plainText.slice(0, 200);
 
   return (
-    <div>
+    <div className="">
       <Typography.P2 className="mt-[10px] text-gray-600">
         {sliced}
         {plainText.length > 200 && (
           <span className="ml-[5px] text-gray-500">더보기...</span>
         )}
       </Typography.P2>
+      <Typography.P1 className="invisible h-0 w-full flex-wrap">
+        blank blank blank blank blank blank blank blank blank blank blank blank
+        blank
+      </Typography.P1>
     </div>
   );
 };
@@ -73,14 +77,12 @@ const PostItem = ({ post }: PostItemProps) => {
   return (
     <Link href={`/post/${post.postSeq}`}>
       <div className="group cursor-pointer p-[30px]">
-        <Typography.P2 className="text-gray-500">
-          {post.categoryName}
-        </Typography.P2>
+        <Typography.P2 className="text-gray-500">{post.category}</Typography.P2>
         <Typography.SubTitle1 className="font-semibold transition-colors duration-200 group-hover:text-sky-400">
-          {post.postTitle}
+          {post.title}
         </Typography.SubTitle1>
-        <Contents contents={post.postContents} />
-        <SubInfo reg={post.regDate} viewed={post.viewed} />
+        <Contents contents={post.content} />
+        <SubInfo reg={post.createdAt} viewed={post.views} />
       </div>
     </Link>
   );

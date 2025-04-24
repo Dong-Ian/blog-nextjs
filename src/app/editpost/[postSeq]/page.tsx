@@ -2,7 +2,7 @@ export const dynamic = "force-dynamic";
 
 import getCategoryList from "@/features/Category/services/getCategoryList.service";
 import getPost from "@/features/Post/services/getPost.service";
-import { PostInterface } from "@/features/Post/type/Post.type";
+import { PostInterface } from "@/features/PostList/types/PostList.type";
 import EditPostingForm from "@/features/Posting/components/EditPostingForm";
 import { PageProps } from "@/shared/types/main.type";
 

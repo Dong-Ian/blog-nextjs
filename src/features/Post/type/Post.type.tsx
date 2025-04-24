@@ -1,16 +1,4 @@
-export interface PostInterface {
-  category?: string;
-  tags?: string[];
-  categoryName?: string;
-  isPinned: "0" | "1";
-  postContents: string;
-  postSeq: string;
-  postTitle: string;
-  regDate: string;
-  modDate: string;
-  userName: string;
-  viewed: string;
-}
+import { PostInterface } from "@/features/PostList/types/PostList.type";
 
 export interface PostParams {
   post: PostInterface;

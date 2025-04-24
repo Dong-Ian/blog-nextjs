@@ -9,8 +9,8 @@ interface InputRowProps {
 
 const InputRow = ({ name, title, placeholder }: InputRowProps) => {
   return (
-    <div className="flex items-center gap-5">
-      <Typography.P2 className="w-[100px] text-right text-sm">
+    <div className="flex items-center py-2">
+      <Typography.P2 className="ml-2 w-[100px] text-left text-sm">
         {title}
       </Typography.P2>
       <div>

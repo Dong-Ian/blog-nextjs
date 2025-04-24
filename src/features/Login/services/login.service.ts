@@ -1,5 +1,3 @@
-import encrypt from "./encrypt.service";
-
 export interface LoginFunctionProps {
   email: string;
   password: string;
@@ -7,18 +5,15 @@ export interface LoginFunctionProps {
 
 export default async function login({ email, password }: LoginFunctionProps) {
   try {
-    const encryptedEmail = encrypt({ data: email });
-    const encryptedPassword = encrypt({ data: password });
-
-    const result = await fetch(`${process.env.NEXT_PUBLIC_API}/user/login`, {
+    const result = await fetch(`${process.env.NEXT_PUBLIC_API}/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       credentials: "include",
       body: JSON.stringify({
-        email: encryptedEmail,
-        password: encryptedPassword,
+        email: email,
+        password: password,
       }),
     });
 

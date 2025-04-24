@@ -1,20 +1,32 @@
 "use client";
+
+import { useRouter } from "next/navigation";
+import React, { useEffect, useRef, useState } from "react";
+import { useForm } from "react-hook-form";
+
+import { AdminFormInput } from "@/app/admin/info/ClientAdminPage";
 import Button from "@/components/atoms/Button";
 import Modal from "@/components/atoms/Modal";
 import getAccount from "@/features/Account/services/getAccount.service";
 import useUserStore from "@/features/Account/stores/userStore";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import React, { useEffect, useRef, useState } from "react";
 import editProfileImage from "../services/editProfileImage.service";
+
+import { storage } from "@/Firebase";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 export default function ImageForm() {
   const router = useRouter();
   const { userInfo, setUser } = useUserStore();
+  const [profileImage, setProfileImage] = useState<string>("");
+
+  const methods = useForm<AdminFormInput>({
+    defaultValues: {
+      profileImage: "",
+    },
+  });
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [formData, setFormData] = useState<FormData>(new FormData());
-  const [previewImage, setPreviewImage] = useState<string>("");
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -22,45 +34,6 @@ export default function ImageForm() {
     if (fileInputRef.current) {
       fileInputRef.current.click();
     }
-  };
-
-  const onChangeImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      if (reader.readyState === 2) {
-        setPreviewImage(reader.result as string);
-      }
-    };
-
-    const newFormData = new FormData();
-    newFormData.append("file", file);
-    setFormData(newFormData);
-  };
-
-  const setNullImage = async () => {
-    const response = await fetch("/images/nullprofile.webp");
-    const blob = await response.blob();
-    const file = new File([blob], "nullprofile.webp", { type: blob.type });
-
-    const dataTransfer = new DataTransfer();
-    dataTransfer.items.add(file);
-    const fileList = dataTransfer.files;
-
-    if (fileInputRef.current) {
-      fileInputRef.current.files = fileList;
-    }
-
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      if (reader.readyState === 2) {
-        setPreviewImage(reader.result as string);
-      }
-    };
   };
 
   const handleClick = () => {
@@ -73,23 +46,54 @@ export default function ImageForm() {
     router.back();
   };
 
+  const uploadImageAndInsert = async (file: File) => {
+    const storageRef = ref(storage, `image/${Date.now()}`);
+    const snapshot = await uploadBytes(storageRef, file);
+    const url = await getDownloadURL(snapshot.ref);
+    setProfileImage(url);
+  };
+
   const handleImageSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const reuslt = await editProfileImage({ formData });
-
-    if (reuslt.code === "01") {
-      setIsModalOpen(false);
-      getAccount().then((user) => {
-        setUser(user);
-      });
+    if (!profileImage) {
+      alert("이미지를 선택해주세요.");
       return;
+    }
+
+    const result = await editProfileImage({ profileImage });
+
+    if (result.status === 200) {
+      setIsModalOpen(false);
+      const user = await getAccount();
+      setUser(user);
+    }
+  };
+
+  const onChangeImageUpload = async (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    await uploadImageAndInsert(file);
+  };
+
+  const deleteProfileImage = async () => {
+    const result = await editProfileImage({ profileImage: "" });
+
+    if (result.status === 200) {
+      setIsModalOpen(false);
+      const user = await getAccount();
+      setUser(user);
     }
   };
 
   useEffect(() => {
     if (isModalOpen) {
-      setNullImage();
+      methods.reset({
+        profileImage: userInfo.profileImage,
+      });
+      setProfileImage(userInfo.profileImage);
     }
   }, [isModalOpen]);
 
@@ -99,7 +103,7 @@ export default function ImageForm() {
         <div className="relative mb-[30px] size-[150px] overflow-hidden rounded-full">
           <Image
             alt="profile"
-            src={userInfo.images.profileImage}
+            src={userInfo.profileImage || "/images/nullprofile.webp"}
             className="object-cover"
             fill
           />
@@ -122,14 +126,14 @@ export default function ImageForm() {
             onSubmit={handleImageSubmit}
           >
             <div className="relative mb-[30px] size-[100px] overflow-hidden rounded-full">
-              {previewImage && (
-                <Image
-                  alt="profile"
-                  src={previewImage}
-                  className="object-cover"
-                  fill
-                />
-              )}
+              (
+              <Image
+                alt="profile"
+                src={profileImage || "/images/nullprofile.webp"}
+                className="object-cover"
+                fill
+              />
+              )
             </div>
 
             <input
@@ -153,7 +157,7 @@ export default function ImageForm() {
                 사진 선택하기
               </Button.Default>
               <Button.Default
-                onClick={setNullImage}
+                onClick={deleteProfileImage}
                 type="button"
                 className="w-full"
               >

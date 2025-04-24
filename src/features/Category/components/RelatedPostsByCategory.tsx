@@ -1,5 +1,5 @@
 import Typography from "@/components/atoms/Typography";
-import { PostInterface } from "@/features/Post/type/Post.type";
+import { PostInterface } from "@/features/PostList/types/PostList.type";
 import { useRouter } from "next/navigation";
 
 interface RelatedPostsByCategoryProps {
@@ -26,7 +26,7 @@ const RelatedPostsByCategory = ({
           className="group flex w-full cursor-pointer justify-between py-1"
         >
           <Typography.P3 className=" transition-all group-hover:text-sky-400">
-            {post.postTitle}
+            {post.title}
           </Typography.P3>
           <i className="bi bi-arrow-right transition-all group-hover:text-sky-400"></i>
         </div>

@@ -2,6 +2,7 @@ import Typography from "@/components/atoms/Typography";
 import Link from "next/link";
 import { getPinnedPostList } from "../services/getPostList.service";
 import { PostInterface } from "../types/PostList.type";
+import BlankPostList from "./BlnckPostList";
 import PostItem from "./PostItem";
 
 interface RecentPostListProps {
@@ -25,9 +26,10 @@ const PinnedPostList = async ({ page, size }: RecentPostListProps) => {
         </Link>
       </div>
       <div className="flex flex-col gap-2">
-        {postList.postList.map((post: PostInterface) => (
+        {postList.posts.map((post: PostInterface) => (
           <PostItem key={post.postSeq} post={post} />
         ))}
+        {postList.posts.length == 0 && <BlankPostList />}
       </div>
     </div>
   );

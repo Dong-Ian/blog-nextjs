@@ -7,12 +7,12 @@ import {
 async function getRecentPostList({ page, size }: GetPostListFunctionProps) {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_TEST}/post/list?page=${page}&size=${size}`,
+      `${process.env.NEXT_PUBLIC_API}/post?page=${page}&size=${size}`,
       {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          BlogId: process.env.NEXT_PUBLIC_BLOG_ID!,
+          blogId: process.env.NEXT_PUBLIC_BLOG_ID!,
         },
       }
     );
@@ -22,7 +22,8 @@ async function getRecentPostList({ page, size }: GetPostListFunctionProps) {
     }
 
     const res = await response.json();
-    return res;
+
+    return res.data;
   } catch (e) {
     console.error("getPostList", e);
   }
@@ -32,12 +33,12 @@ async function getRecentPostList({ page, size }: GetPostListFunctionProps) {
 async function getPinnedPostList({ page, size }: GetPostListFunctionProps) {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_TEST}/post/list?pin=1&page=${page}&size=${size}`,
+      `${process.env.NEXT_PUBLIC_API}/post/pinned?page=${page}&size=${size}`,
       {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          BlogId: process.env.NEXT_PUBLIC_BLOG_ID!,
+          blogId: process.env.NEXT_PUBLIC_BLOG_ID!,
         },
       }
     );
@@ -46,7 +47,7 @@ async function getPinnedPostList({ page, size }: GetPostListFunctionProps) {
       throw new Error("Failed to fetch pinned posts");
     }
     const res = await response.json();
-    return res;
+    return res.data;
   } catch (e) {
     console.error("getPostList", e);
   }
@@ -60,12 +61,12 @@ async function getCategoryPostList({
 }: GetCategoryPostListFunctionProps) {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_TEST}/post/list?category=${category}&page=${page}&size=${size}`,
+      `${process.env.NEXT_PUBLIC_API}/post?category=${category}&page=${page}&size=${size}`,
       {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          BlogId: process.env.NEXT_PUBLIC_BLOG_ID!,
+          blogId: process.env.NEXT_PUBLIC_BLOG_ID!,
         },
       }
     );
@@ -75,8 +76,7 @@ async function getCategoryPostList({
     }
 
     const res = await response.json();
-
-    return res;
+    return res.data;
   } catch (e) {
     console.error("getPostList", e);
   }
@@ -90,12 +90,12 @@ async function getTagPostList({
 }: GetTagPostListFunctionProps) {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_TEST}/post/list?tag=${tag}&page=${page}&size=${size}`,
+      `${process.env.NEXT_PUBLIC_API}/post?tag=${tag}&page=${page}&size=${size}`,
       {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          BlogId: process.env.NEXT_PUBLIC_BLOG_ID!,
+          blogId: process.env.NEXT_PUBLIC_BLOG_ID!,
         },
       }
     );
@@ -105,16 +105,65 @@ async function getTagPostList({
     }
 
     const res = await response.json();
+    return res.data;
+  } catch (e) {
+    console.error("getPostList", e);
+  }
+}
 
-    return res;
+// 인기 게시글을 가져오는 함수
+async function getPopularPostList() {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API}/post/popular`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          blogId: process.env.NEXT_PUBLIC_BLOG_ID!,
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch popular posts`);
+    }
+
+    const res = await response.json();
+    return res.data;
+  } catch (e) {
+    console.error("getPostList", e);
+  }
+}
+
+// 보관된 게시글을 가져오는 함수
+async function getArchivedPostList({ page, size }: GetPostListFunctionProps) {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API}/post/archived?page=${page}&size=${size}`,
+      {
+        method: "GET",
+        credentials: "include",
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch archived posts`);
+    }
+
+    const res = await response.json();
+    console.log("archivedpost:", res.data);
+    return res.data;
   } catch (e) {
     console.error("getPostList", e);
   }
 }
 
 export {
+  getArchivedPostList,
   getCategoryPostList,
   getPinnedPostList,
+  getPopularPostList,
   getRecentPostList,
   getTagPostList,
 };

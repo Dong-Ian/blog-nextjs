@@ -15,3 +15,7 @@ export type TagPageProps = {
 export type SearchPageProps = {
   searchParams: Promise<{ page?: string }>;
 };
+
+export type KeywordSearchPageProps = {
+  searchParams: Promise<{ keyword: string; page?: string }>;
+};

@@ -3,16 +3,13 @@ import { AuthPostProps } from "../type/Post.type";
 export default async function deletePost({ postSeq }: AuthPostProps) {
   try {
     const result = await fetch(
-      `${process.env.NEXT_PUBLIC_API}/admin/post/delete`,
+      `${process.env.NEXT_PUBLIC_API}/post/${postSeq}`,
       {
-        method: "POST",
+        method: "DELETE",
         headers: {
           "Content-Type": "application/json",
         },
         credentials: "include",
-        body: JSON.stringify({
-          postSeq: postSeq,
-        }),
       }
     );
 

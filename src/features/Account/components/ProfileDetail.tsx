@@ -1,15 +1,14 @@
-import Typography from "@/components/atoms/Typography";
 import { ReactNode } from "react";
 
 interface ProfileDetailProps {
-  title: string;
+  icon: string;
   children: ReactNode;
 }
 
-const ProfileDetail = ({ title, children }: ProfileDetailProps) => {
+const ProfileDetail = ({ icon, children }: ProfileDetailProps) => {
   return (
-    <div className="flex w-[300px] items-center py-[10px]">
-      <Typography.P3 className="w-[130px] font-semibold">{title}</Typography.P3>
+    <div className="flex w-[250px] items-center py-[10px]">
+      <i className={`bi ${icon} mr-[30px]`} />
       <div>{children}</div>
     </div>
   );

@@ -33,12 +33,20 @@ export default function PostListClient({
       {posts.map((post) => (
         <PostItem key={post.postSeq} post={post} />
       ))}
-      <Pagination
-        postCount={totalPages}
-        perPage={5}
-        currentPage={currentPage}
-        onPageChange={handlePageChange}
-      />
+      {posts.length == 0 ? (
+        <div className="ml-7 flex items-center justify-center py-60">
+          <Typography.P1 className="text-gray-400">
+            게시글이 없습니다.
+          </Typography.P1>
+        </div>
+      ) : (
+        <Pagination
+          postCount={totalPages}
+          perPage={5}
+          currentPage={currentPage}
+          onPageChange={handlePageChange}
+        />
+      )}
     </div>
   );
 }

@@ -11,21 +11,18 @@ export default async function editpost({
 }: PostingFunctionProps) {
   try {
     const result = await fetch(
-      `${process.env.NEXT_PUBLIC_API}/admin/post/edit`,
+      `${process.env.NEXT_PUBLIC_API}/post/${postSeq}`,
       {
-        method: "POST",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
         credentials: "include",
         body: JSON.stringify({
-          postSeq: postSeq,
-          postTitle: form.title,
-          postContents: form.contents,
-          imageSeqs: [],
+          title: form.title,
+          content: form.content,
           tags: form.tags,
           category: form.category,
-          isPinned: "0",
         }),
       }
     );

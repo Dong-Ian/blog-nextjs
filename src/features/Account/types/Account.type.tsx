@@ -1,15 +1,10 @@
 export interface UserInfoInterface {
-  userName: string;
-  userId: string;
-  userEmail: string;
-  instagram: string;
-  memo: string;
+  name: string;
+  id: string;
+  email: string;
+  instagramId: string;
+  intro: string;
   personalUrl: string;
-  title: string;
-  githubUrl: string;
-  color: string;
-  images: {
-    profileImage: string;
-    backgroundImage: string;
-  };
+  githubId: string;
+  profileImage: string;
 }

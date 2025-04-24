@@ -1,14 +1,14 @@
 export interface PostInterface {
-  category?: string;
-  categoryName?: string;
-  isPinned: "0" | "1";
-  modDate: string;
-  postContents: string;
   postSeq: string;
-  postTitle: string;
-  regDate: string;
-  userName: string;
-  viewed: string;
+  title: string;
+  category: string;
+  content: string;
+  createdAt: string;
+  authorName: string;
+  tags: string[];
+  views: string;
+  archived: boolean;
+  pinned: boolean;
 }
 
 export interface GetPostListFunctionProps {

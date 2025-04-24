@@ -2,24 +2,24 @@
 import Button from "@/components/atoms/Button";
 import Editor from "@/components/atoms/Editor";
 import BackButton from "@/components/molecules/BackButton";
-import { PostInterface } from "@/features/Post/type/Post.type";
+import { PostInterface } from "@/features/PostList/types/PostList.type";
 import { useRouter } from "next/navigation";
 import { FormProvider, useForm } from "react-hook-form";
 import PostingCategory from "../../Category/components/PostingCategory";
+import TagList from "../../Tag/components/TagList";
 import editpost from "../services/editpost.service";
-import TagList from "./TagList";
 import Title from "./Title";
 
 export interface EditPostingInterface {
   title: string;
   category: string;
   tags: string[];
-  contents: string;
+  content: string;
 }
 
 interface PostingFromInterface {
   post: PostInterface;
-  categoryList: string[];
+  categoryList: { categoryId: number; name: string; postCount: number }[];
 }
 const EditPostingForm: React.FC<PostingFromInterface> = ({
   post,
@@ -28,10 +28,10 @@ const EditPostingForm: React.FC<PostingFromInterface> = ({
   const methods = useForm<EditPostingInterface>({
     mode: "onSubmit",
     defaultValues: {
-      title: post.postTitle,
+      title: post.title,
       category: post.category,
       tags: post.tags,
-      contents: post.postContents,
+      content: post.content,
     },
   });
 
@@ -46,7 +46,7 @@ const EditPostingForm: React.FC<PostingFromInterface> = ({
       alert("카테고리를 선택해주세요");
       return;
     }
-    if (!data.contents || data.contents === "") {
+    if (!data.content || data.content === "") {
       alert("내용을 입력해주세요");
       return;
     }
@@ -54,7 +54,7 @@ const EditPostingForm: React.FC<PostingFromInterface> = ({
     if (window.confirm("게시글을 수정하시겠습니까?")) {
       const result = await editpost({ postSeq: post.postSeq, form: data });
 
-      if (result.code === "01") {
+      if (result.status === 200) {
         router.push(`/post/${post.postSeq}`);
         return;
       }

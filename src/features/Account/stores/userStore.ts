@@ -6,24 +6,18 @@ interface UserInfoState {
   setInitialized: () => void;
   userInfo: UserInfoInterface;
   setUser: (user: UserInfoInterface) => void;
-  setProfileImage: (profileImage: string) => void;
   clearUser: () => void;
 }
 
 const initialUserInfo: UserInfoInterface = {
-  userName: "",
-  userId: "",
-  userEmail: "",
-  instagram: "",
-  memo: "",
+  name: "",
+  id: "",
+  email: "",
+  intro: "",
+  instagramId: "",
   personalUrl: "",
-  title: "",
-  githubUrl: "",
-  color: "",
-  images: {
-    profileImage: "",
-    backgroundImage: "",
-  },
+  githubId: "",
+  profileImage: "",
 };
 
 const useUserStore = create<UserInfoState>((set) => ({
@@ -33,17 +27,6 @@ const useUserStore = create<UserInfoState>((set) => ({
   userInfo: initialUserInfo,
 
   setUser: (user) => set({ userInfo: user }),
-
-  setProfileImage: (profileImage) =>
-    set((state) => ({
-      userInfo: {
-        ...state.userInfo,
-        images: {
-          ...state.userInfo.images,
-          profileImage,
-        },
-      },
-    })),
 
   clearUser: () => set({ userInfo: initialUserInfo }),
 }));

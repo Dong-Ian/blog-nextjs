@@ -11,8 +11,8 @@ export default async function Page({ searchParams }: SearchPageProps) {
 
   return (
     <PostListClient
-      posts={res.postList}
-      totalPages={res.postCount}
+      posts={res.posts || []}
+      totalPages={res.totalCount}
       currentPage={currentPage}
     />
   );

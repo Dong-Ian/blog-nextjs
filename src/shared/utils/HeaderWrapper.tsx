@@ -11,7 +11,8 @@ export default function HeaderWrapper() {
     pathname.startsWith("/post/") ||
     pathname === "/postlist" ||
     pathname.startsWith("/postlist/") ||
-    pathname === "/admin";
+    pathname.startsWith("/archived_post/") ||
+    pathname === "/search";
 
   return showHeader ? (
     <div className="mb-[100px]">

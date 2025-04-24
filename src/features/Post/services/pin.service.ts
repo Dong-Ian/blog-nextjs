@@ -1,24 +1,20 @@
 import { AuthPostProps } from "../type/Post.type";
 
-export default async function unpin({ postSeq }: AuthPostProps) {
+export default async function pin({ postSeq }: AuthPostProps) {
   try {
     const result = await fetch(
-      `${process.env.NEXT_PUBLIC_API}/admin/post/update/unpin`,
+      `${process.env.NEXT_PUBLIC_API}/post/${postSeq}/pin`,
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          blogId: process.env.NEXT_PUBLIC_BLOG_ID!,
         },
         credentials: "include",
-        body: JSON.stringify({
-          postSeq: postSeq,
-          blogId: process.env.NEXT_PUBLIC_BLOG_ID,
-        }),
       }
     );
 
     const res = await result.json();
-
     return res;
   } catch (e) {
     console.error("pin", e);

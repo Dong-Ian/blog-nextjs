@@ -23,7 +23,7 @@ const nextConfig: NextConfig = {
     removeConsole: isProduction,
   },
   images: {
-    domains: ["file.donghyuns.com"],
+    domains: ["file.donghyuns.com", "firebasestorage.googleapis.com"],
   },
 };
 

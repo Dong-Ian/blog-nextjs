@@ -14,11 +14,11 @@ const AccountComponent = () => {
 
   return (
     <div className="flex w-[400px] flex-col items-center justify-center p-[30px]">
-      <div className="relative mb-[30px] size-[150px] overflow-hidden rounded-full">
-        {userInfo.images.profileImage && (
+      <div className="relative mb-[30px] size-[200px] overflow-hidden rounded-full transition-all lg:size-[250px]">
+        {userInfo.profileImage && (
           <Image
             alt="profile"
-            src={userInfo.images.profileImage}
+            src={userInfo.profileImage}
             className="object-cover"
             fill
           />
@@ -26,20 +26,20 @@ const AccountComponent = () => {
       </div>
       <div className="mb-[20px] flex flex-col items-center gap-1">
         <Typography.SubTitle1 className="text-[30px] font-bold">
-          {userInfo.userName}
+          {userInfo.name}
         </Typography.SubTitle1>
-        <Typography.P2>{userInfo.memo}</Typography.P2>
+        <Typography.P2>{userInfo.intro}</Typography.P2>
       </div>
 
-      <ProfileDetail title="이메일 정보">
-        <Typography.P3>{userInfo.userEmail}</Typography.P3>
+      <ProfileDetail icon="bi-envelope text-md">
+        <Typography.P3>{userInfo.email}</Typography.P3>
       </ProfileDetail>
-      <Divider width={95} />
-      <ProfileDetail title="소셜 정보">
+      <Divider width={80} />
+      <ProfileDetail icon="bi-info-circle text-md">
         <SocialInfo userInfo={userInfo} />
       </ProfileDetail>
-      <Divider width={95} />
-      <ProfileDetail title="링크">
+      <Divider width={80} />
+      <ProfileDetail icon="bi-link-45deg text-lg">
         <PersonalUrl url={userInfo.personalUrl} />
       </ProfileDetail>
     </div>

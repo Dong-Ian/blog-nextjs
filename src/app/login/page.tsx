@@ -22,7 +22,7 @@ export default function Login() {
   const handleLogin = async (data: LoginFormInput) => {
     const result = await login({ email: data.email, password: data.password });
 
-    if (result.code === "0000") {
+    if (result.status === 200) {
       setAuth(true);
       router.push("/");
       return;

@@ -3,7 +3,7 @@ import Input from "@/components/atoms/Input";
 import { useFormContext } from "react-hook-form";
 
 interface PostingCategoryProps {
-  categoryList: string[];
+  categoryList: { categoryId: number; name: string; postCount: number }[];
 }
 const PostingCategory = ({ categoryList }: PostingCategoryProps) => {
   const methods = useFormContext();
@@ -25,9 +25,9 @@ const PostingCategory = ({ categoryList }: PostingCategoryProps) => {
               key={index}
               type="button"
               className="mb-2 cursor-pointer hover:bg-gray-100"
-              onClick={() => methods.setValue("category", category)}
+              onClick={() => methods.setValue("category", category.name)}
             >
-              {category}
+              {category.name}
             </Button.Default>
           ))}
       </div>

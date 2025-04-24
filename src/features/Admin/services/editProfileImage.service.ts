@@ -1,19 +1,22 @@
 export interface EditProfileImageFunctionProps {
-  formData: FormData;
+  profileImage: string;
 }
 
 export default async function editProfileImage({
-  formData,
+  profileImage,
 }: EditProfileImageFunctionProps) {
   try {
     const result = await fetch(
-      `${process.env.NEXT_PUBLIC_API}/admin/upload/image/profile`,
+      `${process.env.NEXT_PUBLIC_API}/user/update/profileimage`,
       {
-        method: "POST",
-
-        body: formData,
-        redirect: "follow",
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
         credentials: "include",
+        body: JSON.stringify({
+          profileImage: profileImage,
+        }),
       }
     );
 

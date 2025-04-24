@@ -23,8 +23,8 @@ export default async function TagPostList({
   return (
     <PostListClient
       category={decodedCategory}
-      posts={res.postList}
-      totalPages={res.postCount}
+      posts={res.posts || []}
+      totalPages={res.totalCount}
       currentPage={currentPage}
     />
   );

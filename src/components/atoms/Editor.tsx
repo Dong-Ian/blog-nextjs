@@ -12,12 +12,12 @@ import { useFormContext } from "react-hook-form";
 
 const Editor = () => {
   const { setValue, watch } = useFormContext();
-  const contents = watch("contents");
+  const contents = watch("content");
   const editorRef = useRef<HTMLDivElement>(null);
 
   const handleChange = (value?: string) => {
     if (value !== undefined) {
-      setValue("contents", value);
+      setValue("content", value);
     }
   };
 
@@ -28,7 +28,7 @@ const Editor = () => {
     const insert = `![image](${url})`;
 
     const newValue = (contents ?? "") + "\n" + insert;
-    setValue("contents", newValue);
+    setValue("content", newValue);
   };
 
   useEffect(() => {

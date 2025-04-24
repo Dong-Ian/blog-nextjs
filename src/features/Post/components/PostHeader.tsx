@@ -36,9 +36,7 @@ const PostHeader = ({ post }: PostParams) => {
           {post.category}
         </Typography.P1>
       </Link>
-      <Typography.Head2 className="text-[30px]">
-        {post.postTitle}
-      </Typography.Head2>
+      <Typography.Head2 className="text-[30px]">{post.title}</Typography.Head2>
       <div className="flex flex-wrap gap-1">
         {post.tags?.map((tag: string, index: number) => (
           <Link key={index} href={`/postlist/tag/${tag}`}>
@@ -48,7 +46,7 @@ const PostHeader = ({ post }: PostParams) => {
           </Link>
         ))}
       </div>
-      <SubInfo reg={post.regDate} viewed={post.viewed} />
+      <SubInfo reg={post.createdAt} viewed={post.views} />
     </div>
   );
 };

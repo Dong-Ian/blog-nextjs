@@ -1,11 +1,11 @@
 "use client";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 import getAccount from "@/features/Account/services/getAccount.service";
 import useUserStore from "@/features/Account/stores/userStore";
 import { checkToken } from "@/features/Admin/services/checkToken.service";
 import useAdminStore from "@/features/Admin/stores/adminStore";
-import { usePathname, useRouter } from "next/navigation";
-import { useEffect } from "react";
 
 export default function AppInitializer() {
   const router = useRouter();
@@ -16,7 +16,7 @@ export default function AppInitializer() {
   const handleCheckToken = async () => {
     const result = await checkToken();
 
-    if (result.result) {
+    if (result.status === 200) {
       return;
     }
 
@@ -29,7 +29,7 @@ export default function AppInitializer() {
   const initAuth = async () => {
     const result = await checkToken();
 
-    if (result.result) {
+    if (result.status == 200) {
       setAuth(true);
       setAuthInitialized();
       return;

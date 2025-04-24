@@ -1,21 +1,18 @@
 export default async function getCategoryList() {
   try {
     const result = await fetch(
-      `${process.env.NEXT_PUBLIC_API}/post/category/list`,
+      `${process.env.NEXT_PUBLIC_API}/user/categories`,
       {
-        method: "POST",
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
+          blogId: process.env.NEXT_PUBLIC_BLOG_ID!,
         },
-        body: JSON.stringify({
-          blogId: process.env.NEXT_PUBLIC_BLOG_ID,
-        }),
       }
     );
 
     const res = await result.json();
-
-    return res.categoryList;
+    return res.data;
   } catch (e) {
     console.error("getCategoryList", e);
   }

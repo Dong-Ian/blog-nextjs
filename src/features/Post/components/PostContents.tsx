@@ -5,7 +5,7 @@ const PostContents = ({ post }: PostParams) => {
   return (
     <div className="py-[30px]">
       <MDEditor.Markdown
-        source={post.postContents}
+        source={post.content}
         className="w-full break-words"
         style={{
           lineHeight: "30px",

@@ -5,20 +5,21 @@ import BackButton from "@/components/molecules/BackButton";
 import { useRouter } from "next/navigation";
 import { FormProvider, useForm } from "react-hook-form";
 import PostingCategory from "../../Category/components/PostingCategory";
+import TagList from "../../Tag/components/TagList";
 import posting from "../services/posting.service";
-import TagList from "./TagList";
 import Title from "./Title";
 
 export interface PostingInterface {
   title: string;
   category: string;
   tags: string[];
-  contents: string;
+  content: string;
 }
 
 interface PostingFromInterface {
-  categoryList: string[];
+  categoryList: { categoryId: number; name: string; postCount: number }[];
 }
+
 const PostingForm: React.FC<PostingFromInterface> = ({ categoryList }) => {
   const methods = useForm<PostingInterface>({ mode: "onSubmit" });
   const router = useRouter();
@@ -32,7 +33,7 @@ const PostingForm: React.FC<PostingFromInterface> = ({ categoryList }) => {
       alert("카테고리를 선택해주세요");
       return;
     }
-    if (!data.contents || data.contents === "") {
+    if (!data.content || data.content === "") {
       alert("내용을 입력해주세요");
       return;
     }
@@ -40,8 +41,8 @@ const PostingForm: React.FC<PostingFromInterface> = ({ categoryList }) => {
     if (window.confirm("포스팅 하시겠습니까?")) {
       const result = await posting({ form: data });
 
-      if (result.code === "01") {
-        router.push(`/post/${result.postSeq}`);
+      if (result.status === 200) {
+        router.push(`/post/${result.data.postSeq}`);
         return;
       }
       alert("포스팅이 완료되지 않았습니다.\n 잠시 후에 다시 시도해주세요");

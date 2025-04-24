@@ -5,19 +5,19 @@ interface getPostProps {
 export default async function getPost({ postSeq }: getPostProps) {
   try {
     const result = await fetch(
-      `${process.env.NEXT_PUBLIC_API_TEST}/post/${postSeq}`,
+      `${process.env.NEXT_PUBLIC_API}/post/${postSeq}`,
       {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          BlogId: process.env.NEXT_PUBLIC_BLOG_ID!,
+          blogId: process.env.NEXT_PUBLIC_BLOG_ID!,
         },
         next: { revalidate: 60300 },
       }
     );
 
     const res = await result.json();
-    return res.postList;
+    return res.data;
   } catch (e) {
     console.error("getPost", e);
   }

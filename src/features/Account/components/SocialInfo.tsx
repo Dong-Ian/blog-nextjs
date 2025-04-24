@@ -19,11 +19,11 @@ const SocialInfo = ({ userInfo }: SocialInfoProps) => {
         />
         <Link
           className="transition-all hover:text-sky-400"
-          href={`https://github.com/${userInfo.githubUrl}`}
+          href={`https://github.com/${userInfo.githubId}`}
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Typography.P3>{userInfo.githubUrl}</Typography.P3>
+          <Typography.P3>{userInfo.githubId}</Typography.P3>
         </Link>
       </div>
       <div className="flex gap-3">
@@ -36,11 +36,11 @@ const SocialInfo = ({ userInfo }: SocialInfoProps) => {
         />
         <Link
           className="transition-all hover:text-sky-400"
-          href={`https://instagram.com/${userInfo.instagram}`}
+          href={`https://instagram.com/${userInfo.instagramId}`}
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Typography.P3>{userInfo.instagram}</Typography.P3>
+          <Typography.P3>{userInfo.instagramId}</Typography.P3>
         </Link>
       </div>
     </div>
