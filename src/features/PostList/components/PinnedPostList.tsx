@@ -2,7 +2,7 @@ import Typography from "@/components/atoms/Typography";
 import Link from "next/link";
 import { getPinnedPostList } from "../services/getPostList.service";
 import { PostInterface } from "../types/PostList.type";
-import BlankPostList from "./BlnckPostList";
+import BlankPostList from "./BlankPostList";
 import PostItem from "./PostItem";
 
 interface RecentPostListProps {
