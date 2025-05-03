@@ -41,7 +41,7 @@ export default function ClientPost({ post, relatedPosts }: ClientPostProps) {
         {auth && <PostAction post={post} />}
         <PostComment post={post} />
       </div>
-      <div className="hidden lg:fixed lg:right-0 lg:top-40 lg:block">
+      <div className="lg:top-25 hidden lg:fixed lg:right-0 lg:block">
         <TableOfContents title={post.title} />
       </div>
     </div>
