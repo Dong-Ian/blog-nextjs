@@ -55,6 +55,7 @@ const EditPostingForm: React.FC<PostingFromInterface> = ({
       const result = await editpost({ postSeq: post.postSeq, form: data });
 
       if (result.status === 200) {
+        router.refresh();
         router.push(`/post/${post.postSeq}`);
         return;
       }
