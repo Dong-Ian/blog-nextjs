@@ -19,10 +19,9 @@ const TableOfContents = ({ title }: ToCProps) => {
     const extracted = anchors.map((a) => {
       const href = a.getAttribute("href") || "";
       const heading = a.parentElement;
-      const level =
-        heading?.tagName === "H1" || heading?.tagName === "H2"
-          ? Number(heading.tagName[1])
-          : 0;
+      let level = 0;
+      level = Number(heading?.tagName[1]);
+
       const text = heading?.textContent?.trim() || "";
 
       return { href, text, level };
@@ -40,13 +39,13 @@ const TableOfContents = ({ title }: ToCProps) => {
             <li
               key={idx}
               style={{
-                marginLeft: item.level === 1 ? "0px" : "13px",
+                marginLeft: (item.level - 1) * 10,
               }}
               className={`ml-${(item.level - 1) * 4} list-none`}
             >
               <a
                 href={`${item.href}`}
-                className="text-[16px] leading-7 text-gray-500 transition-all hover:text-sky-300"
+                className="text-sm leading-5 text-gray-500 transition-all hover:text-sky-300"
               >
                 {item.text}
               </a>
