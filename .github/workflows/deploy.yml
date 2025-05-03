@@ -20,7 +20,7 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            cd /home/ubuntu/frontend
+            cd /home/ubuntu/blog-nextjs
             git pull origin main
             pnpm install
             pnpm build
