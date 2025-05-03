@@ -19,9 +19,8 @@ const TableOfContents = ({ title }: ToCProps) => {
     const extracted = anchors.map((a) => {
       const href = a.getAttribute("href") || "";
       const heading = a.parentElement;
-      let level = 0;
-      level = Number(heading?.tagName[1]);
 
+      const level = Number(heading?.tagName[1]);
       const text = heading?.textContent?.trim() || "";
 
       return { href, text, level };
@@ -33,24 +32,27 @@ const TableOfContents = ({ title }: ToCProps) => {
   if (tocItems.length >= 1) {
     return (
       <div className="flex w-[380px] flex-col gap-2 border-l-2 px-7">
-        <p className="text-[20px] font-bold">{title}</p>
+        <p className="text-md font-bold">{title}</p>
         <ul className="space-y-1 text-sm">
-          {tocItems.map((item: TOCItem, idx: number) => (
-            <li
-              key={idx}
-              style={{
-                marginLeft: (item.level - 1) * 10,
-              }}
-              className={`ml-${(item.level - 1) * 4} list-none`}
-            >
-              <a
-                href={`${item.href}`}
-                className="text-sm leading-5 text-gray-500 transition-all hover:text-sky-300"
-              >
-                {item.text}
-              </a>
-            </li>
-          ))}
+          {tocItems.map(
+            (item: TOCItem, idx: number) =>
+              item.level <= 3 && (
+                <li
+                  key={idx}
+                  style={{
+                    marginLeft: (item.level - 1) * 10,
+                  }}
+                  className={`ml-${(item.level - 1) * 4} list-none`}
+                >
+                  <a
+                    href={`${item.href}`}
+                    className="text-[15px] leading-6 text-gray-500 transition-all hover:text-sky-300"
+                  >
+                    {item.text}
+                  </a>
+                </li>
+              )
+          )}
         </ul>
       </div>
     );
