@@ -12,7 +12,7 @@ export default async function getPost({ postSeq }: getPostProps) {
           "Content-Type": "application/json",
           blogId: process.env.NEXT_PUBLIC_BLOG_ID!,
         },
-        next: { revalidate: 60300 },
+        // next: { revalidate: 60300 },
       }
     );
 
