@@ -10,7 +10,7 @@ const MobilePostAccountComponent = () => {
   if (!userInfo || !initialized) return null;
 
   return (
-    <div className="m-auto flex w-[90%] flex-col">
+    <div className="m-auto flex w-full flex-col">
       <div className="flex w-full border-b p-[30px]">
         <div className="m-auto flex flex-col items-center gap-10 px-7 sm:m-0 sm:flex-row">
           <div className="relative size-[120px] overflow-hidden rounded-full">
