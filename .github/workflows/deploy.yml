@@ -22,19 +22,25 @@ jobs:
           script: |
             bash -l -c '
               export NPM_CONFIG_PREFIX=$HOME/.npm-global
-              export PATH="$HOME/.npm-global/bin:$HOME/.local/share/pnpm:$PATH"
-          
-              mkdir -p $HOME/.npm-global
-          
-              git config --global --add safe.directory /home/minjae/blog-nextjs
-              cd /home/minjae/blog-nextjs
-              git pull origin main
-          
-              command -v pnpm >/dev/null 2>&1 || npm install -g pnpm
-              command -v pm2 >/dev/null 2>&1 || npm install -g pm2
-          
-              pnpm install
-              pnpm build
-              pm2 delete blognext || true
-              pm2 start "pnpm start" --name blognext
+
+            export PATH="$HOME/.npm-global/bin:$HOME/.local/share/pnpm:$PATH"
+
+            mkdir -p $HOME/.npm-global
+
+            git config --global --add safe.directory /home/minjae/blog-nextjs
+            cd /home/minjae/blog-nextjs
+            git pull origin main
+
+            command -v pnpm >/dev/null 2>&1 || npm install -g pnpm
+            command -v pm2 >/dev/null 2>&1 || npm install -g pm2
+
+            pkill -f "pnpm start" || true
+            pm2 delete blognext || true
+
+            rm -rf .next
+
+            pnpm install
+            pnpm build
+
+            pm2 start "pnpm start" --name blognext --update-env
             '
