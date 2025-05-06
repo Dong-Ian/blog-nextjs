@@ -2,6 +2,7 @@
 import Divider from "@/components/atoms/Divider";
 import BackButton from "@/components/molecules/BackButton";
 import AccountComponent from "@/features/Account/components/AccountComponent";
+import MobilePostAccountComponent from "@/features/Account/components/MobilePostAccountComponent";
 import useAdminStore from "@/features/Admin/stores/adminStore";
 import RelatedPostsByCategory from "@/features/Category/components/RelatedPostsByCategory";
 import PostAction from "@/features/Post/components/PostAction";
@@ -26,8 +27,10 @@ export default function ClientPost({ post, relatedPosts }: ClientPostProps) {
       <div className="hidden lg:fixed lg:left-5 lg:top-[120px] lg:block">
         <AccountComponent />
       </div>
+
       <div className="m-auto w-[90%] max-w-[700px]">
         <BackButton.Back />
+
         <PostHeader post={post} />
         {auth && <PostAction post={post} />}
         <Divider width={100} />
@@ -38,6 +41,9 @@ export default function ClientPost({ post, relatedPosts }: ClientPostProps) {
           relatedPostList={relatedPosts}
         />
         <Divider width={100} />
+        <div className="block lg:hidden">
+          <MobilePostAccountComponent />
+        </div>
         {auth && <PostAction post={post} />}
         <PostComment post={post} />
       </div>
