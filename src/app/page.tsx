@@ -3,18 +3,23 @@ import AccountComponent from "@/features/Account/components/AccountComponent";
 import MobileAccountComponent from "@/features/Account/components/MobileAccountComponent";
 import MainPageCategory from "@/features/Category/components/MainPageCategory";
 import getCategoryList from "@/features/Category/services/getCategoryList.service";
+import CalendarPostList from "@/features/PostList/components/CalendarPostList";
 import MainPagePopularPostList from "@/features/PostList/components/MainPagePopularPostList";
 import PinnedPostList from "@/features/PostList/components/PinnedPostList";
 import RecentPostList from "@/features/PostList/components/RecentPostList";
+import getMonthPostList from "@/features/PostList/services/getMonthPostList.service";
 import { getPopularPostList } from "@/features/PostList/services/getPostList.service";
 import SearchBar from "@/features/Search/components/SearchBar";
-import MainPageTag from "@/features/Tag/components/MainPageTag";
-import getTagList from "@/features/Tag/services/getTagList";
 
 export default async function Home() {
   const categoryList = await getCategoryList();
-  const tagList = await getTagList();
   const popularList = await getPopularPostList();
+
+  const today = new Date();
+  const monthPostList = await getMonthPostList({
+    year: today.getFullYear(),
+    month: today.getMonth() + 1,
+  });
 
   return (
     <div>
@@ -41,7 +46,11 @@ export default async function Home() {
             <SearchBar />
             <MainPagePopularPostList postList={popularList} />
             <MainPageCategory categoryList={categoryList} />
-            <MainPageTag tagList={tagList} />
+            <CalendarPostList
+              year={today.getFullYear()}
+              month={today.getMonth() + 1}
+              dayList={monthPostList}
+            />
           </div>
         </div>
       </div>
