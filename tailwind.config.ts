@@ -12,6 +12,7 @@ export default {
       tablet: "990px",
       laptop: "1200px",
       desktop: "1600px",
+      xs: "450px",
       sm: "500px",
       md: "1200px",
       lg: "1550px",

@@ -1,5 +1,6 @@
 import Divider from "@/components/atoms/Divider";
 import AccountComponent from "@/features/Account/components/AccountComponent";
+import MobileAccountComponent from "@/features/Account/components/MobileAccountComponent";
 import MainPageCategory from "@/features/Category/components/MainPageCategory";
 import getCategoryList from "@/features/Category/services/getCategoryList.service";
 import MainPagePopularPostList from "@/features/PostList/components/MainPagePopularPostList";
@@ -22,10 +23,13 @@ export default async function Home() {
           <div className="hidden md:fixed md:left-5 md:top-[120px] md:block">
             <AccountComponent />
           </div>
+          <div className="block md:hidden">
+            <MobileAccountComponent />
+          </div>
           <div className="hidden md:mr-[200px] md:block md:w-[300px] lg:hidden"></div>
 
           <div className="lg:ml-[280px] lg:flex">
-            <div className="flex w-full flex-col gap-6 px-4 md:m-auto md:max-w-[90%] lg:max-w-[760px]">
+            <div className="m-auto flex w-[90%] flex-col gap-6 px-4 md:m-auto md:max-w-[90%] lg:max-w-[760px]">
               <PinnedPostList page={1} size={5} />
               <Divider width={100} />
               <RecentPostList page={1} size={5} />
