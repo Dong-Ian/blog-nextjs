@@ -12,7 +12,6 @@ interface ContentsProps {
 
 interface SubInfoProps {
   reg: string;
-  viewed: string;
 }
 
 const Contents = ({ contents }: ContentsProps) => {
@@ -52,7 +51,7 @@ const Contents = ({ contents }: ContentsProps) => {
   );
 };
 
-const SubInfo = ({ reg, viewed }: SubInfoProps) => {
+const SubInfo = ({ reg }: SubInfoProps) => {
   const date = new Date(reg);
   date.setHours(date.getHours() + 9);
 
@@ -64,10 +63,7 @@ const SubInfo = ({ reg, viewed }: SubInfoProps) => {
 
   return (
     <div className="mt-[10px]">
-      <Typography.P3 className="text-gray-400">
-        {formattedDate}
-        <span> | 조회수 {viewed}</span>
-      </Typography.P3>
+      <Typography.P3 className="text-gray-400">{formattedDate}</Typography.P3>
     </div>
   );
 };
@@ -82,7 +78,7 @@ const ArchivedPostItem = ({ post }: PostItemProps) => {
         </Typography.SubTitle1>
 
         <Contents contents={post.content} />
-        <SubInfo reg={post.createdAt} viewed={post.views} />
+        <SubInfo reg={post.createdAt} />
       </div>
     </Link>
   );

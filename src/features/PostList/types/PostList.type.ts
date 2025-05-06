@@ -6,7 +6,6 @@ export interface PostInterface {
   createdAt: string;
   authorName: string;
   tags: string[];
-  views: string;
   archived: boolean;
   pinned: boolean;
 }
