@@ -75,7 +75,7 @@ const SubInfo = ({ reg, viewed }: SubInfoProps) => {
 
 const PostItem = ({ post }: PostItemProps) => {
   return (
-    <Link href={`/post/${post.postSeq}`}>
+    <Link href={`/post/${post.postSeq}`} prefetch={false}>
       <div className="group cursor-pointer p-[30px]">
         <Typography.P2 className="text-gray-500">{post.category}</Typography.P2>
         <Typography.SubTitle1 className="font-semibold transition-colors duration-200 group-hover:text-sky-400">
